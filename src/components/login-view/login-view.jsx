@@ -36,7 +36,7 @@ export const LoginView = ({ onLoggedIn }) => {
         <input
           type="text"
           value={name}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
           required
         />
       </label>

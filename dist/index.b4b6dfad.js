@@ -28424,7 +28424,7 @@ const LoginView = ({ onLoggedIn })=>{
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                         type: "text",
                         value: name,
-                        onChange: (e)=>setUsername(e.target.value),
+                        onChange: (e)=>setName(e.target.value),
                         required: true
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
@@ -28509,7 +28509,7 @@ const SignupView = ()=>{
             email: email,
             birthday: birthday
         };
-        fetch("SIGNUP_URL", {
+        fetch("https://movie-api-da5i.onrender.com/users", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {

@@ -14,7 +14,7 @@ export const SignupView = () => {
       birthday: birthday
     };
 
-    fetch("SIGNUP_URL", {
+    fetch("https://movie-api-da5i.onrender.com/users", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
