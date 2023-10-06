@@ -5,12 +5,16 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 
 export const MainView = () => {
-  const storedUser = JSON.parse(localStorage.getItem('user'))
-  const storedToken = localStorage.getItem('token')
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
+
+  // const storedUser = JSON.parse(localStorage.getItem("user")); // got an error 'SyntaxError: "undefined" is not valid JSON'
+  const storedUser = localStorage.getItem("user");   //works as as it should
+  const storedToken = localStorage.getItem("token");
+
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] =  useState(storedToken ? storedToken : null)
+
 
   useEffect(() => {
     if(!token) {
