@@ -3,6 +3,9 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import  Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
@@ -37,37 +40,34 @@ export const MainView = () => {
       setMovies(movieFromApi)
       })
     }, [token])
-  
 
-    if (!user) {
-      return (
-        <>
-          <LoginView
+  return (
+    
+    !user ? (
+      <Container>
+          <Row >
+            <Col > 
+            <LoginView 
             onLoggedIn={(user, token) => {
               setUser(user);
               setToken(token);
             }}
           />
-          or
+          </Col>
+          <Col>
           <SignupView />
-        </>
-      );
-    }
-
-  if (selectedMovie) {
-    return (
+          </Col>
+          </Row>
+        </Container>
+    ) : selectedMovie ? (
       <MovieView
         movie={selectedMovie}
         onBackClick={() => setSelectedMovie(null)}
       />
-    );
-  }
-  if (movies.length === 0) {
-    return <div>The list is empty!</div>;
-  }
-
-  return (
-    <div>
+    ) : movies.length === 0 ? (
+      <div>The list is empty!</div>
+    ) : (
+      <div>
       {movies.map((movie) => {
         return (
           <MovieCard
@@ -79,7 +79,6 @@ export const MainView = () => {
           />
         );
       })}
-
       <button
         onClick={() => {
           setUser(null);
@@ -91,5 +90,7 @@ export const MainView = () => {
       </button>
 
     </div>
+    )
+    
   );
 };

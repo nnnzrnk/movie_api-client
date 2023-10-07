@@ -1,5 +1,27 @@
-$color: steelblue;
 
-.my-flix {
-    color: $color;
+@import '~bootstrap/scss/bootstrap.scss';
+
+body {
+    color: #353535;
+    background-color: #3c6e71;
+}
+
+
+.submit {
+    margin-top: 1rem;
+    background-color: #bc4b51;
+    border: none;
+}
+
+.submit:hover, 
+.submit:focus {
+    opacity: 0.9;
+    background-color: #284b63;
+}
+
+.card-title {
+    text-align: center;
+    font-size: 28px;
+    padding-bottom: 3rem;
+    letter-spacing: 2px;
 }
