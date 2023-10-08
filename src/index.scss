@@ -1,5 +1,64 @@
-$color: steelblue;
 
-.my-flix {
-    color: $color;
+@import '~bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+body {
+    color: #353535;
+    background-color: #3c6e71;
+    font-family: 'Montserrat', sans-serif;
+   
+}
+
+
+.submit,
+.close-open-btn,
+.btn-logout  {
+    margin-top: 1rem;
+    background-color: #bc4b51;
+    border: none;
+    cursor: pointer;
+}
+
+.submit:hover, 
+.submit:focus,
+.close-open-btn:hover,
+.close-open-btn:focus{
+    opacity: 0.9;
+    background-color: #bc4b51;
+}
+
+.card-title {
+    text-align: center;
+    font-size: 28px;
+    padding-bottom: 3rem;
+    letter-spacing: 2px;
+}
+
+.my-navbar{
+    background-color: #3c6e71;
+
+}
+
+.btn-logout {
+    margin: 1.5rem;
+    background-color: #bc4b51;
+    padding: 7px 12px;
+    font-size: 20px;
+} 
+
+.btn-logout:hover,
+.btn-logout:focus {
+    opacity: 0.9;
+    background-color: #bc4b51;
+}
+
+.text-title {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    font-size: 1.2rem;
+    
+}
+
+svg {
+    margin-left: 1rem;
 }
