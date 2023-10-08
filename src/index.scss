@@ -1,22 +1,32 @@
 
 @import '~bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
 
 body {
     color: #353535;
     background-color: #3c6e71;
+    font-family: 'Montserrat', sans-serif;
+   
 }
 
 
-.submit {
+.submit,
+.close-open-btn,
+.btn-logout  {
     margin-top: 1rem;
     background-color: #bc4b51;
     border: none;
+    cursor: pointer;
 }
 
 .submit:hover, 
-.submit:focus {
+.submit:focus,
+.close-open-btn:hover,
+.close-open-btn:focus,
+.btn-logout:hover,
+.btn-logout:focus {
     opacity: 0.9;
-    background-color: #284b63;
+    background-color: #bc4b51;
 }
 
 .card-title {
@@ -24,4 +34,18 @@ body {
     font-size: 28px;
     padding-bottom: 3rem;
     letter-spacing: 2px;
+}
+
+.btn-logout {
+    margin: 1.5rem;
+    position: absolute;
+    padding: 7px 12px;
+    font-size: 20px;
+}
+
+.text-title {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    font-size: 1.2rem;
+    
 }

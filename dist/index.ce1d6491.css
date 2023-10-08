@@ -1,3 +1,4 @@
+@import "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap";
 :root, [data-bs-theme="light"] {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -13206,17 +13207,19 @@ textarea.form-control-lg {
 body {
   color: #353535;
   background-color: #3c6e71;
+  font-family: Montserrat, sans-serif;
 }
 
-.submit {
+.submit, .close-open-btn, .btn-logout {
+  cursor: pointer;
   background-color: #bc4b51;
   border: none;
   margin-top: 1rem;
 }
 
-.submit:hover, .submit:focus {
+.submit:hover, .submit:focus, .close-open-btn:hover, .close-open-btn:focus, .btn-logout:hover, .btn-logout:focus {
   opacity: .9;
-  background-color: #284b63;
+  background-color: #bc4b51;
 }
 
 .card-title {
@@ -13224,6 +13227,19 @@ body {
   letter-spacing: 2px;
   padding-bottom: 3rem;
   font-size: 28px;
+}
+
+.btn-logout {
+  margin: 1.5rem;
+  padding: 7px 12px;
+  font-size: 20px;
+  position: absolute;
+}
+
+.text-title {
+  letter-spacing: .5px;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 /*# sourceMappingURL=index.ce1d6491.css.map */

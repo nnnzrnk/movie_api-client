@@ -3,9 +3,7 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
-import  Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Button, Card, Container, Row, Col } from 'react-bootstrap';
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
@@ -42,8 +40,8 @@ export const MainView = () => {
     }, [token])
 
   return (
-    
-    !user ? (
+    <Row className="justify-content-md-center">
+    {!user ? (
       <Container>
           <Row >
             <Col > 
@@ -60,26 +58,18 @@ export const MainView = () => {
           </Row>
         </Container>
     ) : selectedMovie ? (
+      <Col>
       <MovieView
         movie={selectedMovie}
         onBackClick={() => setSelectedMovie(null)}
       />
+      </Col>
     ) : movies.length === 0 ? (
       <div>The list is empty!</div>
     ) : (
-      <div>
-      {movies.map((movie) => {
-        return (
-          <MovieCard
-            key={movie.id}
-            movieData={movie}
-            onMovieClick={(newSelectedMovie) =>
-              setSelectedMovie(newSelectedMovie)
-            }
-          />
-        );
-      })}
-      <button
+      <Container>
+        <Button
+      className="btn-logout"
         onClick={() => {
           setUser(null);
           setToken(null);
@@ -87,10 +77,25 @@ export const MainView = () => {
         }}
       >
         Logout
-      </button>
-
-    </div>
-    )
-    
+      </Button>
+      {movies.map((movie) => {
+        return (
+          <Row>
+          <Col>
+          <MovieCard
+          key={movie.id} 
+            movieData={movie}
+            onMovieClick={(newSelectedMovie) =>
+              setSelectedMovie(newSelectedMovie)
+            }
+          />
+          </Col>
+          </Row>
+          
+        );
+      })}
+    </Container>
+    )}
+    </Row>
   );
 };
