@@ -13217,7 +13217,7 @@ body {
   margin-top: 1rem;
 }
 
-.submit:hover, .submit:focus, .close-open-btn:hover, .close-open-btn:focus, .btn-logout:hover, .btn-logout:focus {
+.submit:hover, .submit:focus, .close-open-btn:hover, .close-open-btn:focus {
   opacity: .9;
   background-color: #bc4b51;
 }
@@ -13229,17 +13229,30 @@ body {
   font-size: 28px;
 }
 
+.my-navbar {
+  background-color: #3c6e71;
+}
+
 .btn-logout {
+  background-color: #bc4b51;
   margin: 1.5rem;
   padding: 7px 12px;
   font-size: 20px;
-  position: absolute;
+}
+
+.btn-logout:hover, .btn-logout:focus {
+  opacity: .9;
+  background-color: #bc4b51;
 }
 
 .text-title {
   letter-spacing: .5px;
   font-size: 1.2rem;
   font-weight: 500;
+}
+
+svg {
+  margin-left: 1rem;
 }
 
 /*# sourceMappingURL=index.ce1d6491.css.map */

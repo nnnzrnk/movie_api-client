@@ -22,9 +22,7 @@ body {
 .submit:hover, 
 .submit:focus,
 .close-open-btn:hover,
-.close-open-btn:focus,
-.btn-logout:hover,
-.btn-logout:focus {
+.close-open-btn:focus{
     opacity: 0.9;
     background-color: #bc4b51;
 }
@@ -36,11 +34,22 @@ body {
     letter-spacing: 2px;
 }
 
+.my-navbar{
+    background-color: #3c6e71;
+
+}
+
 .btn-logout {
     margin: 1.5rem;
-    position: absolute;
+    background-color: #bc4b51;
     padding: 7px 12px;
     font-size: 20px;
+} 
+
+.btn-logout:hover,
+.btn-logout:focus {
+    opacity: 0.9;
+    background-color: #bc4b51;
 }
 
 .text-title {
@@ -48,4 +57,8 @@ body {
     letter-spacing: 0.5px;
     font-size: 1.2rem;
     
+}
+
+svg {
+    margin-left: 1rem;
 }

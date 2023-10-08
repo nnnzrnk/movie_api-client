@@ -1,17 +1,10 @@
 import PropTypes from 'prop-types'
-import { Button, Card, Container, Row, Col } from 'react-bootstrap';
+import { Button, Card} from 'react-bootstrap';
 
 export const MovieCard = ({ movieData, onMovieClick }) => {
     return (
-      <Row className='m-3 justify-content-md-center'>
-      <Col md={6} >
-      <Card className='shadow p-4 border-0'>
-      <Container>
-        <Row>
-      <Col>  
-      <Card.Img className='m-2'  src={movieData.image}/> 
-      </Col>
-          <Col>
+      <Card className='shadow p-4 border-0 h-100' > 
+      <Card.Img className='m-2' src={movieData.image}/> 
        <Card.Body >
         <Card.Title>{movieData.title}</Card.Title>
         <Card.Text>{movieData.description}</Card.Text>
@@ -19,13 +12,8 @@ export const MovieCard = ({ movieData, onMovieClick }) => {
           onMovieClick(movieData);
         }}>Open</Button>
        </Card.Body>
-     
-          </Col>
-        </Row>
-      </Container>
       </Card>
-      </Col>
-      </Row>
+
     );
   };
 
