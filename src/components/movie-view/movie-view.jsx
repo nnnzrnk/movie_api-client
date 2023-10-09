@@ -1,6 +1,14 @@
 import { Button, Card} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movies }) => {
+
+const movieId = useParams();
+const movie = movies.find((m) => m._id === movieId);
+
+console.log(movies)
+
     return (
     <Card className='shadow p-4 border-0'>
       <Card.Img 
@@ -12,11 +20,36 @@ export const MovieView = ({ movie, onBackClick }) => {
         <Card.Text>{movie.description}</Card.Text>
         <Card.Text><span className='text-title'>Genre:</span> {movie.genre}</Card.Text>
         <Card.Text><span className='text-title'>Director:</span> {movie.director}</Card.Text>
-        <Button className='close-open-btn' onClick={onBackClick}>Back</Button>
+        <Link to='/'>
+        <Button className='close-open-btn'>Back</Button>
+        </Link>
       </Card.Body>
     </Card>
 
     );
   };
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
