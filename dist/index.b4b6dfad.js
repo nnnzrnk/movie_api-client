@@ -27170,6 +27170,7 @@ var _movieView = require("../movie-view/movie-view");
 var _loginView = require("../login-view/login-view");
 var _signupView = require("../signup-view/signup-view");
 var _navigationBar = require("../navigation-bar/navigation-bar");
+var _profileView = require("../profile-view/profile-view");
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
 var _s = $RefreshSig$();
@@ -27183,7 +27184,12 @@ const MainView = ()=>{
     const [token, setToken] = (0, _react.useState)(storedToken ? storedToken : null);
     (0, _react.useEffect)(()=>{
         if (!token) return;
-        fetch("https://movie-api-da5i.onrender.com/movies").then((response)=>response.json()).then((data)=>{
+        fetch("https://movie-api-da5i.onrender.com/movies", {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>response.json()).then((data)=>{
             setMovies(data);
         });
     }, [
@@ -27199,8 +27205,8 @@ const MainView = ()=>{
                 }
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 34,
-                columnNumber: 5
+                lineNumber: 37,
+                columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
                 className: "justify-content-md-center",
@@ -27218,7 +27224,7 @@ const MainView = ()=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 44,
+                            lineNumber: 47,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27240,7 +27246,7 @@ const MainView = ()=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 59,
+                            lineNumber: 62,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27261,7 +27267,7 @@ const MainView = ()=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 81,
+                            lineNumber: 84,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27277,31 +27283,58 @@ const MainView = ()=>{
                                             md: 3,
                                             className: "mx-2 my-3 justify-content-md-center",
                                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                                                movieData: movie
+                                                movieData: movie,
+                                                user: user,
+                                                token: token,
+                                                setUser: setUser
                                             }, void 0, false, void 0, void 0)
-                                        }, movie.id, false, void 0, void 0))
+                                        }, movie._id, false, void 0, void 0))
                                 }, void 0, false)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 98,
+                            lineNumber: 101,
+                            columnNumber: 11
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                            path: "/profile",
+                            element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                                children: !user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
+                                    to: "/login",
+                                    replace: true
+                                }, void 0, false, void 0, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
+                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileView.ProfileView), {
+                                            movies: movies,
+                                            onDelete: ()=>{
+                                                setUser(null);
+                                                setToken(null);
+                                                localStorage.clear();
+                                            }
+                                        }, void 0, false, void 0, void 0)
+                                    }, void 0, false, void 0, void 0)
+                                }, void 0, false, void 0, void 0)
+                            }, void 0, false)
+                        }, void 0, false, {
+                            fileName: "src/components/main-view/main-view.jsx",
+                            lineNumber: 128,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 42,
+                    lineNumber: 46,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 41,
+                lineNumber: 45,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 33,
+        lineNumber: 36,
         columnNumber: 5
     }, undefined);
 };
@@ -27315,7 +27348,7 @@ $RefreshReg$(_c, "MainView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","../login-view/login-view":"9YtA0","../signup-view/signup-view":"4OGiN","../navigation-bar/navigation-bar":"bsPVM","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"jj9zW","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"erfJX"}],"bwuIu":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","../login-view/login-view":"9YtA0","../signup-view/signup-view":"4OGiN","../navigation-bar/navigation-bar":"bsPVM","../profile-view/profile-view":"2vVqf","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"jj9zW","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"erfJX"}],"bwuIu":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -27330,7 +27363,51 @@ var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
-const MovieCard = ({ movieData })=>{
+var _react = require("react");
+var _s = $RefreshSig$();
+const MovieCard = ({ movieData, token, setUser, user })=>{
+    _s();
+    const [isFavorite, setIsFavorite] = (0, _react.useState)(user.FavoriteMovies.includes(movieData._id));
+    const addFavoriteMovie = ()=>{
+        fetch(`https://movie-api-da5i.onrender.com/users/${user.name}/movies/${movieData._id}`), ({
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            if (response.ok) return response.json();
+            else console.log("failed to add fav movie");
+        }).then((user)=>{
+            if (user) {
+                alert("successfully added to favorites");
+                localStorage.setItem("user", JSON.stringify(user));
+                setUser(user);
+                setIsFavorite(true);
+            }
+        }).catch((error)=>{
+            alert(error);
+        });
+    };
+    const removeFavoriteMovie = ()=>{
+        fetch(`https://movie-api-da5i.onrender.com/users/${user.name}/movies/${movieData._id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            if (response.ok) return response.json();
+            else alert("Failed");
+        }).then((user)=>{
+            if (user) {
+                alert("successfully deleted from favorites");
+                localStorage.setItem("user", JSON.stringify(user));
+                setUser(user);
+                setIsFavorite(false);
+            }
+        }).catch((error)=>{
+            alert(error);
+        });
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
         className: "shadow p-4 border-0 h-100",
         children: [
@@ -27339,7 +27416,7 @@ const MovieCard = ({ movieData })=>{
                 src: movieData.image
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 8,
+                lineNumber: 62,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -27348,14 +27425,14 @@ const MovieCard = ({ movieData })=>{
                         children: movieData.title
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 10,
+                        lineNumber: 66,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                         children: movieData.description
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 11,
+                        lineNumber: 67,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -27365,27 +27442,49 @@ const MovieCard = ({ movieData })=>{
                             children: "Open"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 13,
+                            lineNumber: 69,
                             columnNumber: 9
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 12,
+                        lineNumber: 68,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Footer, {
+                        children: !isFavorite ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                            onClick: addFavoriteMovie,
+                            children: "+"
+                        }, void 0, false, {
+                            fileName: "src/components/movie-card/movie-card.jsx",
+                            lineNumber: 73,
+                            columnNumber: 13
+                        }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                            onClick: removeFavoriteMovie,
+                            children: "-"
+                        }, void 0, false, {
+                            fileName: "src/components/movie-card/movie-card.jsx",
+                            lineNumber: 75,
+                            columnNumber: 13
+                        }, undefined)
+                    }, void 0, false, {
+                        fileName: "src/components/movie-card/movie-card.jsx",
+                        lineNumber: 71,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 9,
+                lineNumber: 65,
                 columnNumber: 8
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 7,
+        lineNumber: 61,
         columnNumber: 7
     }, undefined);
 };
+_s(MovieCard, "dgLjlgtDEpHeYjev4YW0cNJDj4A=");
 _c = MovieCard;
 MovieCard.propTypes = {
     movieData: (0, _propTypesDefault.default).shape({
@@ -27402,7 +27501,7 @@ $RefreshReg$(_c, "MovieCard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"jj9zW","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"erfJX"}],"7wKI2":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"jj9zW","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"erfJX"}],"7wKI2":[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -47379,7 +47478,6 @@ const MovieView = ({ movies })=>{
     _s();
     const movieId = (0, _reactRouterDom.useParams)();
     const movie = movies.find((m)=>m._id === movieId);
-    console.log(movies);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
         className: "shadow p-4 border-0",
         children: [
@@ -47389,7 +47487,7 @@ const MovieView = ({ movies })=>{
                 alt: ""
             }, void 0, false, {
                 fileName: "src/components/movie-view/movie-view.jsx",
-                lineNumber: 14,
+                lineNumber: 12,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -47399,14 +47497,14 @@ const MovieView = ({ movies })=>{
                         children: movie.title
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 19,
+                        lineNumber: 17,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                         children: movie.description
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 20,
+                        lineNumber: 18,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
@@ -47416,7 +47514,7 @@ const MovieView = ({ movies })=>{
                                 children: "Genre:"
                             }, void 0, false, {
                                 fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 21,
+                                lineNumber: 19,
                                 columnNumber: 20
                             }, undefined),
                             " ",
@@ -47424,7 +47522,7 @@ const MovieView = ({ movies })=>{
                         ]
                     }, void 0, true, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 21,
+                        lineNumber: 19,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
@@ -47434,7 +47532,7 @@ const MovieView = ({ movies })=>{
                                 children: "Director:"
                             }, void 0, false, {
                                 fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 22,
+                                lineNumber: 20,
                                 columnNumber: 20
                             }, undefined),
                             " ",
@@ -47442,7 +47540,7 @@ const MovieView = ({ movies })=>{
                         ]
                     }, void 0, true, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 22,
+                        lineNumber: 20,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -47452,24 +47550,24 @@ const MovieView = ({ movies })=>{
                             children: "Back"
                         }, void 0, false, {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 24,
+                            lineNumber: 22,
                             columnNumber: 9
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 23,
+                        lineNumber: 21,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-view/movie-view.jsx",
-                lineNumber: 18,
+                lineNumber: 16,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-view/movie-view.jsx",
-        lineNumber: 13,
+        lineNumber: 11,
         columnNumber: 5
     }, undefined);
 };
@@ -47690,168 +47788,162 @@ const SignupView = ()=>{
             } else alert("Signup failed");
         });
     };
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
-            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
-                    className: "shadow p-4 mb-4 bg-white mt-5 border-0 ",
-                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.CardBody), {
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.CardTitle), {
-                                className: "card-title",
-                                children: "Signup"
-                            }, void 0, false, {
-                                fileName: "src/components/signup-view/signup-view.jsx",
-                                lineNumber: 39,
-                                columnNumber: 7
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form), {
-                                onSubmit: handleSubmit,
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
-                                        controlId: "formName",
-                                        children: [
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
-                                                children: "Name:"
-                                            }, void 0, false, {
-                                                fileName: "src/components/signup-view/signup-view.jsx",
-                                                lineNumber: 42,
-                                                columnNumber: 9
-                                            }, undefined),
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
-                                                type: "text",
-                                                value: name,
-                                                onChange: (e)=>setName(e.target.value),
-                                                required: true
-                                            }, void 0, false, {
-                                                fileName: "src/components/signup-view/signup-view.jsx",
-                                                lineNumber: 43,
-                                                columnNumber: 9
-                                            }, undefined)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "src/components/signup-view/signup-view.jsx",
-                                        lineNumber: 41,
-                                        columnNumber: 9
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
-                                        controlId: "formPassword",
-                                        children: [
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
-                                                children: "Password:"
-                                            }, void 0, false, {
-                                                fileName: "src/components/signup-view/signup-view.jsx",
-                                                lineNumber: 51,
-                                                columnNumber: 9
-                                            }, undefined),
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
-                                                type: "password",
-                                                value: password,
-                                                onChange: (e)=>setPassword(e.target.value),
-                                                required: true
-                                            }, void 0, false, {
-                                                fileName: "src/components/signup-view/signup-view.jsx",
-                                                lineNumber: 52,
-                                                columnNumber: 9
-                                            }, undefined)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "src/components/signup-view/signup-view.jsx",
-                                        lineNumber: 50,
-                                        columnNumber: 7
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
-                                        controlId: "formEmail",
-                                        children: [
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
-                                                children: "Email:"
-                                            }, void 0, false, {
-                                                fileName: "src/components/signup-view/signup-view.jsx",
-                                                lineNumber: 60,
-                                                columnNumber: 9
-                                            }, undefined),
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
-                                                type: "email",
-                                                value: email,
-                                                onChange: (e)=>setEmail(e.target.value),
-                                                required: true
-                                            }, void 0, false, {
-                                                fileName: "src/components/signup-view/signup-view.jsx",
-                                                lineNumber: 61,
-                                                columnNumber: 9
-                                            }, undefined)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "src/components/signup-view/signup-view.jsx",
-                                        lineNumber: 59,
-                                        columnNumber: 7
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
-                                        controlId: "formBirthday",
-                                        children: [
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
-                                                children: "Birthday:"
-                                            }, void 0, false, {
-                                                fileName: "src/components/signup-view/signup-view.jsx",
-                                                lineNumber: 69,
-                                                columnNumber: 9
-                                            }, undefined),
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
-                                                type: "date",
-                                                value: birthday,
-                                                onChange: (e)=>setBirthday(e.target.value),
-                                                required: true
-                                            }, void 0, false, {
-                                                fileName: "src/components/signup-view/signup-view.jsx",
-                                                lineNumber: 70,
-                                                columnNumber: 9
-                                            }, undefined)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "src/components/signup-view/signup-view.jsx",
-                                        lineNumber: 68,
-                                        columnNumber: 7
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
-                                        className: "submit",
-                                        type: "submit",
-                                        children: "Submit"
-                                    }, void 0, false, {
-                                        fileName: "src/components/signup-view/signup-view.jsx",
-                                        lineNumber: 76,
-                                        columnNumber: 5
-                                    }, undefined)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/signup-view/signup-view.jsx",
-                                lineNumber: 40,
-                                columnNumber: 5
-                            }, undefined)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/components/signup-view/signup-view.jsx",
-                        lineNumber: 38,
-                        columnNumber: 5
-                    }, undefined)
-                }, void 0, false, {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
+            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
+                className: "shadow p-4 mb-4 bg-white mt-5 border-0 ",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.CardBody), {
+                    children: [
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.CardTitle), {
+                            className: "card-title",
+                            children: "Signup"
+                        }, void 0, false, {
+                            fileName: "src/components/signup-view/signup-view.jsx",
+                            lineNumber: 39,
+                            columnNumber: 7
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form), {
+                            onSubmit: handleSubmit,
+                            children: [
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
+                                    controlId: "formName",
+                                    children: [
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
+                                            children: "Name:"
+                                        }, void 0, false, {
+                                            fileName: "src/components/signup-view/signup-view.jsx",
+                                            lineNumber: 42,
+                                            columnNumber: 9
+                                        }, undefined),
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
+                                            type: "text",
+                                            value: name,
+                                            onChange: (e)=>setName(e.target.value),
+                                            required: true
+                                        }, void 0, false, {
+                                            fileName: "src/components/signup-view/signup-view.jsx",
+                                            lineNumber: 43,
+                                            columnNumber: 9
+                                        }, undefined)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "src/components/signup-view/signup-view.jsx",
+                                    lineNumber: 41,
+                                    columnNumber: 9
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
+                                    controlId: "formPassword",
+                                    children: [
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
+                                            children: "Password:"
+                                        }, void 0, false, {
+                                            fileName: "src/components/signup-view/signup-view.jsx",
+                                            lineNumber: 51,
+                                            columnNumber: 9
+                                        }, undefined),
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
+                                            type: "password",
+                                            value: password,
+                                            onChange: (e)=>setPassword(e.target.value),
+                                            required: true
+                                        }, void 0, false, {
+                                            fileName: "src/components/signup-view/signup-view.jsx",
+                                            lineNumber: 52,
+                                            columnNumber: 9
+                                        }, undefined)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "src/components/signup-view/signup-view.jsx",
+                                    lineNumber: 50,
+                                    columnNumber: 7
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
+                                    controlId: "formEmail",
+                                    children: [
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
+                                            children: "Email:"
+                                        }, void 0, false, {
+                                            fileName: "src/components/signup-view/signup-view.jsx",
+                                            lineNumber: 60,
+                                            columnNumber: 9
+                                        }, undefined),
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
+                                            type: "email",
+                                            value: email,
+                                            onChange: (e)=>setEmail(e.target.value),
+                                            required: true
+                                        }, void 0, false, {
+                                            fileName: "src/components/signup-view/signup-view.jsx",
+                                            lineNumber: 61,
+                                            columnNumber: 9
+                                        }, undefined)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "src/components/signup-view/signup-view.jsx",
+                                    lineNumber: 59,
+                                    columnNumber: 7
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
+                                    controlId: "formBirthday",
+                                    children: [
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
+                                            children: "Birthday:"
+                                        }, void 0, false, {
+                                            fileName: "src/components/signup-view/signup-view.jsx",
+                                            lineNumber: 69,
+                                            columnNumber: 9
+                                        }, undefined),
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
+                                            type: "date",
+                                            value: birthday,
+                                            onChange: (e)=>setBirthday(e.target.value),
+                                            required: true
+                                        }, void 0, false, {
+                                            fileName: "src/components/signup-view/signup-view.jsx",
+                                            lineNumber: 70,
+                                            columnNumber: 9
+                                        }, undefined)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "src/components/signup-view/signup-view.jsx",
+                                    lineNumber: 68,
+                                    columnNumber: 7
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                                    className: "submit",
+                                    type: "submit",
+                                    children: "Submit"
+                                }, void 0, false, {
+                                    fileName: "src/components/signup-view/signup-view.jsx",
+                                    lineNumber: 76,
+                                    columnNumber: 5
+                                }, undefined)
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/components/signup-view/signup-view.jsx",
+                            lineNumber: 40,
+                            columnNumber: 5
+                        }, undefined)
+                    ]
+                }, void 0, true, {
                     fileName: "src/components/signup-view/signup-view.jsx",
-                    lineNumber: 37,
-                    columnNumber: 3
+                    lineNumber: 38,
+                    columnNumber: 5
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/signup-view/signup-view.jsx",
-                lineNumber: 36,
+                lineNumber: 37,
                 columnNumber: 3
             }, undefined)
         }, void 0, false, {
             fileName: "src/components/signup-view/signup-view.jsx",
-            lineNumber: 35,
-            columnNumber: 1
+            lineNumber: 36,
+            columnNumber: 3
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/signup-view/signup-view.jsx",
-        lineNumber: 34,
-        columnNumber: 5
+        lineNumber: 35,
+        columnNumber: 1
     }, undefined);
 };
 _s(SignupView, "jaOgMEVKDMRKUt5FZLn+uaRNTJc=");
@@ -47880,200 +47972,218 @@ var _reactRouterDom = require("react-router-dom");
 const NavigationBar = ({ user, onLoggedOut })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar), {
         className: "my-navbar shadow-lg ",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
-            children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Brand, {
-                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("svg", {
-                        width: "300",
-                        height: "95",
-                        viewBox: "0 0 354 95",
-                        fill: "none",
-                        xmlns: "http://www.w3.org/2000/svg",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("g", {
-                                filter: "url(#filter0_d_304_4)",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Brand, {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("svg", {
+                    width: "300",
+                    height: "95",
+                    viewBox: "0 0 354 95",
+                    fill: "none",
+                    xmlns: "http://www.w3.org/2000/svg",
+                    children: [
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("g", {
+                            filter: "url(#filter0_d_304_4)",
+                            children: [
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("path", {
+                                    d: "M5.52 63V7H14.08L38.56 47.88H34.08L58.16 7H66.72L66.8 63H56.96L56.88 22.44H58.96L38.48 56.6H33.84L13.04 22.44H15.44V63H5.52ZM100.486 79.08C98.4063 79.08 96.3263 78.7333 94.2463 78.04C92.1663 77.3467 90.4329 76.3867 89.0462 75.16L93.0462 67.8C94.0596 68.7067 95.2063 69.4267 96.4863 69.96C97.7663 70.4933 99.0729 70.76 100.406 70.76C102.22 70.76 103.686 70.3067 104.806 69.4C105.926 68.4933 106.966 66.9733 107.926 64.84L110.406 59.24L111.206 58.04L127.366 20.28H136.966L116.966 66.44C115.633 69.64 114.14 72.1733 112.486 74.04C110.886 75.9067 109.073 77.2133 107.046 77.96C105.073 78.7067 102.886 79.08 100.486 79.08ZM109.286 64.52L90.0062 20.28H100.406L116.086 57.16L109.286 64.52ZM169.696 32.76H197.616V41.56H169.696V32.76ZM170.576 63H160.176V7H201.056V15.72H170.576V63ZM226.154 63V3.64H236.154V63H226.154ZM265.279 63V20.28H275.279V63H265.279ZM270.319 13.24C268.452 13.24 266.905 12.6533 265.679 11.48C264.505 10.3067 263.919 8.89333 263.919 7.24C263.919 5.53333 264.505 4.12 265.679 3C266.905 1.82666 268.452 1.24 270.319 1.24C272.185 1.24 273.705 1.8 274.879 2.92C276.105 3.98667 276.719 5.34667 276.719 7C276.719 8.76 276.132 10.2533 274.959 11.48C273.785 12.6533 272.239 13.24 270.319 13.24ZM298.564 63L317.364 38.52L317.204 43.88L299.284 20.28H310.404L322.964 37.08H318.724L331.364 20.28H342.164L324.084 43.88L324.164 38.52L342.884 63H331.604L318.404 45.16L322.564 45.72L309.604 63H298.564Z",
+                                    fill: "#BC4B51"
+                                }, void 0, false, {
+                                    fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                                    lineNumber: 18,
+                                    columnNumber: 5
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("path", {
+                                    d: "M5.52 63H3.52V65H5.52V63ZM5.52 7V5H3.52V7H5.52ZM14.08 7L15.7959 5.97249L15.2135 5H14.08V7ZM38.56 47.88V49.88H42.0888L40.2759 46.8525L38.56 47.88ZM34.08 47.88L32.3567 46.8649L30.5807 49.88H34.08V47.88ZM58.16 7V5H57.0169L56.4367 5.98492L58.16 7ZM66.72 7L68.72 6.99714L68.7171 5H66.72V7ZM66.8 63V65H68.8029L68.8 62.9971L66.8 63ZM56.96 63L54.96 63.0039L54.9639 65H56.96V63ZM56.88 22.44V20.44H54.8761L54.88 22.4439L56.88 22.44ZM58.96 22.44L60.6753 23.4684L62.491 20.44H58.96V22.44ZM38.48 56.6V58.6H39.6128L40.1953 57.6284L38.48 56.6ZM33.84 56.6L32.1318 57.6401L32.7162 58.6H33.84V56.6ZM13.04 22.44V20.44H9.48061L11.3318 23.4801L13.04 22.44ZM15.44 22.44H17.44V20.44H15.44V22.44ZM15.44 63V65H17.44V63H15.44ZM7.52 63V7H3.52V63H7.52ZM5.52 9H14.08V5H5.52V9ZM12.3641 8.02751L36.8441 48.9075L40.2759 46.8525L15.7959 5.97249L12.3641 8.02751ZM38.56 45.88H34.08V49.88H38.56V45.88ZM35.8033 48.8951L59.8833 8.01507L56.4367 5.98492L32.3567 46.8649L35.8033 48.8951ZM58.16 9H66.72V5H58.16V9ZM64.72 7.00285L64.8 63.0029L68.8 62.9971L68.72 6.99714L64.72 7.00285ZM66.8 61H56.96V65H66.8V61ZM58.96 62.9961L58.88 22.4361L54.88 22.4439L54.96 63.0039L58.96 62.9961ZM56.88 24.44H58.96V20.44H56.88V24.44ZM57.2447 21.4116L36.7647 55.5716L40.1953 57.6284L60.6753 23.4684L57.2447 21.4116ZM38.48 54.6H33.84V58.6H38.48V54.6ZM35.5482 55.5599L14.7482 21.3998L11.3318 23.4801L32.1318 57.6401L35.5482 55.5599ZM13.04 24.44H15.44V20.44H13.04V24.44ZM13.44 22.44V63H17.44V22.44H13.44ZM15.44 61H5.52V65H15.44V61ZM94.2463 78.04L93.6138 79.9374L93.6138 79.9374L94.2463 78.04ZM89.0462 75.16L87.289 74.205L86.529 75.6034L87.7211 76.658L89.0462 75.16ZM93.0462 67.8L94.3798 66.3095L92.496 64.624L91.289 66.845L93.0462 67.8ZM96.4863 69.96L97.2555 68.1138L97.2555 68.1138L96.4863 69.96ZM104.806 69.4L106.065 70.9545L106.065 70.9545L104.806 69.4ZM107.926 64.84L109.75 65.6607L109.755 65.6499L107.926 64.84ZM110.406 59.24L108.742 58.1306L108.647 58.2733L108.578 58.4301L110.406 59.24ZM111.206 58.04L112.87 59.1494L112.972 58.9962L113.045 58.8269L111.206 58.04ZM127.366 20.28V18.28H126.047L125.528 19.4931L127.366 20.28ZM136.966 20.28L138.801 21.0751L140.012 18.28H136.966V20.28ZM116.966 66.44L115.131 65.6449L115.126 65.6578L115.12 65.6708L116.966 66.44ZM112.486 74.04L110.989 72.7139L110.978 72.7261L110.968 72.7384L112.486 74.04ZM107.046 77.96L106.355 76.0833L106.347 76.0863L106.338 76.0894L107.046 77.96ZM109.286 64.52L107.453 65.319L108.677 68.1271L110.755 65.8772L109.286 64.52ZM90.0062 20.28V18.28H86.953L88.1728 21.079L90.0062 20.28ZM100.406 20.28L102.247 19.4975L101.729 18.28H100.406V20.28ZM116.086 57.16L117.555 58.5172L118.433 57.5675L117.927 56.3775L116.086 57.16ZM100.486 77.08C98.6326 77.08 96.7659 76.7717 94.8787 76.1426L93.6138 79.9374C95.8866 80.695 98.1799 81.08 100.486 81.08V77.08ZM94.8787 76.1426C93.0078 75.519 91.5228 74.6806 90.3714 73.662L87.7211 76.658C89.343 78.0928 91.3247 79.1743 93.6138 79.9374L94.8787 76.1426ZM90.8035 76.115L94.8035 68.755L91.289 66.845L87.289 74.205L90.8035 76.115ZM91.7127 69.2905C92.8962 70.3494 94.2345 71.1884 95.717 71.8062L97.2555 68.1138C96.178 67.6649 95.223 67.0639 94.3798 66.3095L91.7127 69.2905ZM95.717 71.8062C97.2308 72.4369 98.7983 72.76 100.406 72.76V68.76C99.3475 68.76 98.3017 68.5498 97.2555 68.1138L95.717 71.8062ZM100.406 72.76C102.557 72.76 104.505 72.2173 106.065 70.9545L103.548 67.8455C102.868 68.396 101.883 68.76 100.406 68.76V72.76ZM106.065 70.9545C107.534 69.765 108.733 67.9216 109.75 65.6607L106.102 64.0193C105.2 66.0251 104.318 67.2217 103.548 67.8455L106.065 70.9545ZM109.755 65.6499L112.235 60.0499L108.578 58.4301L106.098 64.0301L109.755 65.6499ZM112.07 60.3494L112.87 59.1494L109.542 56.9306L108.742 58.1306L112.07 60.3494ZM113.045 58.8269L129.205 21.0669L125.528 19.4931L109.368 57.2531L113.045 58.8269ZM127.366 22.28H136.966V18.28H127.366V22.28ZM135.131 19.4849L115.131 65.6449L118.801 67.2351L138.801 21.0751L135.131 19.4849ZM115.12 65.6708C113.841 68.7406 112.451 71.0629 110.989 72.7139L113.983 75.3661C115.828 73.2838 117.425 70.5395 118.812 67.2092L115.12 65.6708ZM110.968 72.7384C109.559 74.3823 108.019 75.4701 106.355 76.0833L107.738 79.8367C110.127 78.9565 112.214 77.431 114.005 75.3416L110.968 72.7384ZM106.338 76.0894C104.62 76.7396 102.677 77.08 100.486 77.08V81.08C103.095 81.08 105.526 80.6737 107.754 79.8306L106.338 76.0894ZM111.12 63.721L91.8397 19.481L88.1728 21.079L107.453 65.319L111.12 63.721ZM90.0062 22.28H100.406V18.28H90.0062V22.28ZM98.5657 21.0625L114.246 57.9425L117.927 56.3775L102.247 19.4975L98.5657 21.0625ZM114.617 55.8028L107.817 63.1628L110.755 65.8772L117.555 58.5172L114.617 55.8028ZM169.696 32.76V30.76H167.696V32.76H169.696ZM197.616 32.76H199.616V30.76H197.616V32.76ZM197.616 41.56V43.56H199.616V41.56H197.616ZM169.696 41.56H167.696V43.56H169.696V41.56ZM170.576 63V65H172.576V63H170.576ZM160.176 63H158.176V65H160.176V63ZM160.176 7V5H158.176V7H160.176ZM201.056 7H203.056V5H201.056V7ZM201.056 15.72V17.72H203.056V15.72H201.056ZM170.576 15.72V13.72H168.576V15.72H170.576ZM169.696 34.76H197.616V30.76H169.696V34.76ZM195.616 32.76V41.56H199.616V32.76H195.616ZM197.616 39.56H169.696V43.56H197.616V39.56ZM171.696 41.56V32.76H167.696V41.56H171.696ZM170.576 61H160.176V65H170.576V61ZM162.176 63V7H158.176V63H162.176ZM160.176 9H201.056V5H160.176V9ZM199.056 7V15.72H203.056V7H199.056ZM201.056 13.72H170.576V17.72H201.056V13.72ZM168.576 15.72V63H172.576V15.72H168.576ZM226.154 63H224.154V65H226.154V63ZM226.154 3.64V1.64H224.154V3.64H226.154ZM236.154 3.64H238.154V1.64H236.154V3.64ZM236.154 63V65H238.154V63H236.154ZM228.154 63V3.64H224.154V63H228.154ZM226.154 5.64H236.154V1.64H226.154V5.64ZM234.154 3.64V63H238.154V3.64H234.154ZM236.154 61H226.154V65H236.154V61ZM265.279 63H263.279V65H265.279V63ZM265.279 20.28V18.28H263.279V20.28H265.279ZM275.279 20.28H277.279V18.28H275.279V20.28ZM275.279 63V65H277.279V63H275.279ZM265.679 11.48L264.265 12.8942L264.28 12.9099L264.296 12.9253L265.679 11.48ZM265.679 3L267.06 4.44671L267.061 4.44528L265.679 3ZM274.879 2.92L273.498 4.36671L273.531 4.39875L273.566 4.42921L274.879 2.92ZM274.959 11.48L276.373 12.8942L276.389 12.8785L276.404 12.8624L274.959 11.48ZM267.279 63V20.28H263.279V63H267.279ZM265.279 22.28H275.279V18.28H265.279V22.28ZM273.279 20.28V63H277.279V20.28H273.279ZM275.279 61H265.279V65H275.279V61ZM270.319 11.24C268.911 11.24 267.877 10.8151 267.061 10.0347L264.296 12.9253C265.934 14.4916 267.993 15.24 270.319 15.24V11.24ZM267.093 10.0658C266.293 9.26599 265.919 8.36073 265.919 7.24H261.919C261.919 9.42593 262.718 11.3473 264.265 12.8942L267.093 10.0658ZM265.919 7.24C265.919 6.04796 266.304 5.16782 267.06 4.44671L264.298 1.55329C262.707 3.07218 261.919 5.01871 261.919 7.24H265.919ZM267.061 4.44528C267.877 3.66489 268.911 3.24 270.319 3.24V-0.760001C267.993 -0.760001 265.934 -0.0115621 264.296 1.55471L267.061 4.44528ZM270.319 3.24C271.755 3.24 272.753 3.65559 273.498 4.36671L276.26 1.47328C274.658 -0.0555955 272.616 -0.760001 270.319 -0.760001V3.24ZM273.566 4.42921C274.348 5.10864 274.719 5.91419 274.719 7H278.719C278.719 4.77914 277.863 2.86469 276.191 1.41079L273.566 4.42921ZM274.719 7C274.719 8.26598 274.317 9.25801 273.513 10.0976L276.404 12.8624C277.948 11.2486 278.719 9.25401 278.719 7H274.719ZM273.545 10.0658C272.806 10.8047 271.799 11.24 270.319 11.24V15.24C272.679 15.24 274.765 14.5019 276.373 12.8942L273.545 10.0658ZM298.564 63L296.978 61.7818L294.506 65H298.564V63ZM317.364 38.52L319.363 38.5797L319.548 32.3928L315.778 37.3018L317.364 38.52ZM317.204 43.88L315.611 45.0895L319.034 49.5975L319.203 43.9397L317.204 43.88ZM299.284 20.28V18.28H295.254L297.691 21.4895L299.284 20.28ZM310.404 20.28L312.006 19.0824L311.406 18.28H310.404V20.28ZM322.964 37.08V39.08H326.956L324.566 35.8824L322.964 37.08ZM318.724 37.08L317.126 35.8776L314.716 39.08H318.724V37.08ZM331.364 20.28V18.28H330.366L329.766 19.0776L331.364 20.28ZM342.164 20.28L343.751 21.4963L346.215 18.28H342.164V20.28ZM324.084 43.88L322.084 43.8502L321.994 49.8968L325.671 45.0963L324.084 43.88ZM324.164 38.52L325.752 37.3051L322.25 32.725L322.164 38.4902L324.164 38.52ZM342.884 63V65H346.931L344.472 61.7851L342.884 63ZM331.604 63L329.996 64.1896L330.596 65H331.604V63ZM318.404 45.16L318.671 43.1779L313.982 42.5468L316.796 46.3496L318.404 45.16ZM322.564 45.72L324.164 46.92L326.209 44.1927L322.831 43.7379L322.564 45.72ZM309.604 63V65H310.604L311.204 64.2L309.604 63ZM300.15 64.2182L318.95 39.7382L315.778 37.3018L296.978 61.7818L300.15 64.2182ZM315.365 38.4603L315.205 43.8203L319.203 43.9397L319.363 38.5797L315.365 38.4603ZM318.797 42.6705L300.877 19.0705L297.691 21.4895L315.611 45.0895L318.797 42.6705ZM299.284 22.28H310.404V18.28H299.284V22.28ZM308.802 21.4776L321.362 38.2776L324.566 35.8824L312.006 19.0824L308.802 21.4776ZM322.964 35.08H318.724V39.08H322.964V35.08ZM320.322 38.2824L332.962 21.4824L329.766 19.0776L317.126 35.8776L320.322 38.2824ZM331.364 22.28H342.164V18.28H331.364V22.28ZM340.576 19.0637L322.496 42.6637L325.671 45.0963L343.751 21.4963L340.576 19.0637ZM326.084 43.9098L326.164 38.5498L322.164 38.4902L322.084 43.8502L326.084 43.9098ZM322.575 39.7349L341.295 64.2149L344.472 61.7851L325.752 37.3051L322.575 39.7349ZM342.884 61H331.604V65H342.884V61ZM333.212 61.8104L320.012 43.9704L316.796 46.3496L329.996 64.1896L333.212 61.8104ZM318.137 47.1421L322.297 47.7021L322.831 43.7379L318.671 43.1779L318.137 47.1421ZM320.964 44.52L308.004 61.8L311.204 64.2L324.164 46.92L320.964 44.52ZM309.604 61H298.564V65H309.604V61Z",
+                                    fill: "#BC4B51"
+                                }, void 0, false, {
+                                    fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                                    lineNumber: 22,
+                                    columnNumber: 5
+                                }, undefined)
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                            lineNumber: 17,
+                            columnNumber: 3
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("defs", {
+                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("filter", {
+                                id: "filter0_d_304_4",
+                                x: "0.52002",
+                                y: "0.239998",
+                                width: "353.364",
+                                height: "93.84",
+                                filterUnits: "userSpaceOnUse",
+                                "color-interpolation-filters": "sRGB",
                                 children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("path", {
-                                        d: "M5.52 63V7H14.08L38.56 47.88H34.08L58.16 7H66.72L66.8 63H56.96L56.88 22.44H58.96L38.48 56.6H33.84L13.04 22.44H15.44V63H5.52ZM100.486 79.08C98.4063 79.08 96.3263 78.7333 94.2463 78.04C92.1663 77.3467 90.4329 76.3867 89.0462 75.16L93.0462 67.8C94.0596 68.7067 95.2063 69.4267 96.4863 69.96C97.7663 70.4933 99.0729 70.76 100.406 70.76C102.22 70.76 103.686 70.3067 104.806 69.4C105.926 68.4933 106.966 66.9733 107.926 64.84L110.406 59.24L111.206 58.04L127.366 20.28H136.966L116.966 66.44C115.633 69.64 114.14 72.1733 112.486 74.04C110.886 75.9067 109.073 77.2133 107.046 77.96C105.073 78.7067 102.886 79.08 100.486 79.08ZM109.286 64.52L90.0062 20.28H100.406L116.086 57.16L109.286 64.52ZM169.696 32.76H197.616V41.56H169.696V32.76ZM170.576 63H160.176V7H201.056V15.72H170.576V63ZM226.154 63V3.64H236.154V63H226.154ZM265.279 63V20.28H275.279V63H265.279ZM270.319 13.24C268.452 13.24 266.905 12.6533 265.679 11.48C264.505 10.3067 263.919 8.89333 263.919 7.24C263.919 5.53333 264.505 4.12 265.679 3C266.905 1.82666 268.452 1.24 270.319 1.24C272.185 1.24 273.705 1.8 274.879 2.92C276.105 3.98667 276.719 5.34667 276.719 7C276.719 8.76 276.132 10.2533 274.959 11.48C273.785 12.6533 272.239 13.24 270.319 13.24ZM298.564 63L317.364 38.52L317.204 43.88L299.284 20.28H310.404L322.964 37.08H318.724L331.364 20.28H342.164L324.084 43.88L324.164 38.52L342.884 63H331.604L318.404 45.16L322.564 45.72L309.604 63H298.564Z",
-                                        fill: "#BC4B51"
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feFlood", {
+                                        "flood-opacity": "0",
+                                        result: "BackgroundImageFix"
                                     }, void 0, false, {
                                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                        lineNumber: 18,
-                                        columnNumber: 5
+                                        lineNumber: 37,
+                                        columnNumber: 7
                                     }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("path", {
-                                        d: "M5.52 63H3.52V65H5.52V63ZM5.52 7V5H3.52V7H5.52ZM14.08 7L15.7959 5.97249L15.2135 5H14.08V7ZM38.56 47.88V49.88H42.0888L40.2759 46.8525L38.56 47.88ZM34.08 47.88L32.3567 46.8649L30.5807 49.88H34.08V47.88ZM58.16 7V5H57.0169L56.4367 5.98492L58.16 7ZM66.72 7L68.72 6.99714L68.7171 5H66.72V7ZM66.8 63V65H68.8029L68.8 62.9971L66.8 63ZM56.96 63L54.96 63.0039L54.9639 65H56.96V63ZM56.88 22.44V20.44H54.8761L54.88 22.4439L56.88 22.44ZM58.96 22.44L60.6753 23.4684L62.491 20.44H58.96V22.44ZM38.48 56.6V58.6H39.6128L40.1953 57.6284L38.48 56.6ZM33.84 56.6L32.1318 57.6401L32.7162 58.6H33.84V56.6ZM13.04 22.44V20.44H9.48061L11.3318 23.4801L13.04 22.44ZM15.44 22.44H17.44V20.44H15.44V22.44ZM15.44 63V65H17.44V63H15.44ZM7.52 63V7H3.52V63H7.52ZM5.52 9H14.08V5H5.52V9ZM12.3641 8.02751L36.8441 48.9075L40.2759 46.8525L15.7959 5.97249L12.3641 8.02751ZM38.56 45.88H34.08V49.88H38.56V45.88ZM35.8033 48.8951L59.8833 8.01507L56.4367 5.98492L32.3567 46.8649L35.8033 48.8951ZM58.16 9H66.72V5H58.16V9ZM64.72 7.00285L64.8 63.0029L68.8 62.9971L68.72 6.99714L64.72 7.00285ZM66.8 61H56.96V65H66.8V61ZM58.96 62.9961L58.88 22.4361L54.88 22.4439L54.96 63.0039L58.96 62.9961ZM56.88 24.44H58.96V20.44H56.88V24.44ZM57.2447 21.4116L36.7647 55.5716L40.1953 57.6284L60.6753 23.4684L57.2447 21.4116ZM38.48 54.6H33.84V58.6H38.48V54.6ZM35.5482 55.5599L14.7482 21.3998L11.3318 23.4801L32.1318 57.6401L35.5482 55.5599ZM13.04 24.44H15.44V20.44H13.04V24.44ZM13.44 22.44V63H17.44V22.44H13.44ZM15.44 61H5.52V65H15.44V61ZM94.2463 78.04L93.6138 79.9374L93.6138 79.9374L94.2463 78.04ZM89.0462 75.16L87.289 74.205L86.529 75.6034L87.7211 76.658L89.0462 75.16ZM93.0462 67.8L94.3798 66.3095L92.496 64.624L91.289 66.845L93.0462 67.8ZM96.4863 69.96L97.2555 68.1138L97.2555 68.1138L96.4863 69.96ZM104.806 69.4L106.065 70.9545L106.065 70.9545L104.806 69.4ZM107.926 64.84L109.75 65.6607L109.755 65.6499L107.926 64.84ZM110.406 59.24L108.742 58.1306L108.647 58.2733L108.578 58.4301L110.406 59.24ZM111.206 58.04L112.87 59.1494L112.972 58.9962L113.045 58.8269L111.206 58.04ZM127.366 20.28V18.28H126.047L125.528 19.4931L127.366 20.28ZM136.966 20.28L138.801 21.0751L140.012 18.28H136.966V20.28ZM116.966 66.44L115.131 65.6449L115.126 65.6578L115.12 65.6708L116.966 66.44ZM112.486 74.04L110.989 72.7139L110.978 72.7261L110.968 72.7384L112.486 74.04ZM107.046 77.96L106.355 76.0833L106.347 76.0863L106.338 76.0894L107.046 77.96ZM109.286 64.52L107.453 65.319L108.677 68.1271L110.755 65.8772L109.286 64.52ZM90.0062 20.28V18.28H86.953L88.1728 21.079L90.0062 20.28ZM100.406 20.28L102.247 19.4975L101.729 18.28H100.406V20.28ZM116.086 57.16L117.555 58.5172L118.433 57.5675L117.927 56.3775L116.086 57.16ZM100.486 77.08C98.6326 77.08 96.7659 76.7717 94.8787 76.1426L93.6138 79.9374C95.8866 80.695 98.1799 81.08 100.486 81.08V77.08ZM94.8787 76.1426C93.0078 75.519 91.5228 74.6806 90.3714 73.662L87.7211 76.658C89.343 78.0928 91.3247 79.1743 93.6138 79.9374L94.8787 76.1426ZM90.8035 76.115L94.8035 68.755L91.289 66.845L87.289 74.205L90.8035 76.115ZM91.7127 69.2905C92.8962 70.3494 94.2345 71.1884 95.717 71.8062L97.2555 68.1138C96.178 67.6649 95.223 67.0639 94.3798 66.3095L91.7127 69.2905ZM95.717 71.8062C97.2308 72.4369 98.7983 72.76 100.406 72.76V68.76C99.3475 68.76 98.3017 68.5498 97.2555 68.1138L95.717 71.8062ZM100.406 72.76C102.557 72.76 104.505 72.2173 106.065 70.9545L103.548 67.8455C102.868 68.396 101.883 68.76 100.406 68.76V72.76ZM106.065 70.9545C107.534 69.765 108.733 67.9216 109.75 65.6607L106.102 64.0193C105.2 66.0251 104.318 67.2217 103.548 67.8455L106.065 70.9545ZM109.755 65.6499L112.235 60.0499L108.578 58.4301L106.098 64.0301L109.755 65.6499ZM112.07 60.3494L112.87 59.1494L109.542 56.9306L108.742 58.1306L112.07 60.3494ZM113.045 58.8269L129.205 21.0669L125.528 19.4931L109.368 57.2531L113.045 58.8269ZM127.366 22.28H136.966V18.28H127.366V22.28ZM135.131 19.4849L115.131 65.6449L118.801 67.2351L138.801 21.0751L135.131 19.4849ZM115.12 65.6708C113.841 68.7406 112.451 71.0629 110.989 72.7139L113.983 75.3661C115.828 73.2838 117.425 70.5395 118.812 67.2092L115.12 65.6708ZM110.968 72.7384C109.559 74.3823 108.019 75.4701 106.355 76.0833L107.738 79.8367C110.127 78.9565 112.214 77.431 114.005 75.3416L110.968 72.7384ZM106.338 76.0894C104.62 76.7396 102.677 77.08 100.486 77.08V81.08C103.095 81.08 105.526 80.6737 107.754 79.8306L106.338 76.0894ZM111.12 63.721L91.8397 19.481L88.1728 21.079L107.453 65.319L111.12 63.721ZM90.0062 22.28H100.406V18.28H90.0062V22.28ZM98.5657 21.0625L114.246 57.9425L117.927 56.3775L102.247 19.4975L98.5657 21.0625ZM114.617 55.8028L107.817 63.1628L110.755 65.8772L117.555 58.5172L114.617 55.8028ZM169.696 32.76V30.76H167.696V32.76H169.696ZM197.616 32.76H199.616V30.76H197.616V32.76ZM197.616 41.56V43.56H199.616V41.56H197.616ZM169.696 41.56H167.696V43.56H169.696V41.56ZM170.576 63V65H172.576V63H170.576ZM160.176 63H158.176V65H160.176V63ZM160.176 7V5H158.176V7H160.176ZM201.056 7H203.056V5H201.056V7ZM201.056 15.72V17.72H203.056V15.72H201.056ZM170.576 15.72V13.72H168.576V15.72H170.576ZM169.696 34.76H197.616V30.76H169.696V34.76ZM195.616 32.76V41.56H199.616V32.76H195.616ZM197.616 39.56H169.696V43.56H197.616V39.56ZM171.696 41.56V32.76H167.696V41.56H171.696ZM170.576 61H160.176V65H170.576V61ZM162.176 63V7H158.176V63H162.176ZM160.176 9H201.056V5H160.176V9ZM199.056 7V15.72H203.056V7H199.056ZM201.056 13.72H170.576V17.72H201.056V13.72ZM168.576 15.72V63H172.576V15.72H168.576ZM226.154 63H224.154V65H226.154V63ZM226.154 3.64V1.64H224.154V3.64H226.154ZM236.154 3.64H238.154V1.64H236.154V3.64ZM236.154 63V65H238.154V63H236.154ZM228.154 63V3.64H224.154V63H228.154ZM226.154 5.64H236.154V1.64H226.154V5.64ZM234.154 3.64V63H238.154V3.64H234.154ZM236.154 61H226.154V65H236.154V61ZM265.279 63H263.279V65H265.279V63ZM265.279 20.28V18.28H263.279V20.28H265.279ZM275.279 20.28H277.279V18.28H275.279V20.28ZM275.279 63V65H277.279V63H275.279ZM265.679 11.48L264.265 12.8942L264.28 12.9099L264.296 12.9253L265.679 11.48ZM265.679 3L267.06 4.44671L267.061 4.44528L265.679 3ZM274.879 2.92L273.498 4.36671L273.531 4.39875L273.566 4.42921L274.879 2.92ZM274.959 11.48L276.373 12.8942L276.389 12.8785L276.404 12.8624L274.959 11.48ZM267.279 63V20.28H263.279V63H267.279ZM265.279 22.28H275.279V18.28H265.279V22.28ZM273.279 20.28V63H277.279V20.28H273.279ZM275.279 61H265.279V65H275.279V61ZM270.319 11.24C268.911 11.24 267.877 10.8151 267.061 10.0347L264.296 12.9253C265.934 14.4916 267.993 15.24 270.319 15.24V11.24ZM267.093 10.0658C266.293 9.26599 265.919 8.36073 265.919 7.24H261.919C261.919 9.42593 262.718 11.3473 264.265 12.8942L267.093 10.0658ZM265.919 7.24C265.919 6.04796 266.304 5.16782 267.06 4.44671L264.298 1.55329C262.707 3.07218 261.919 5.01871 261.919 7.24H265.919ZM267.061 4.44528C267.877 3.66489 268.911 3.24 270.319 3.24V-0.760001C267.993 -0.760001 265.934 -0.0115621 264.296 1.55471L267.061 4.44528ZM270.319 3.24C271.755 3.24 272.753 3.65559 273.498 4.36671L276.26 1.47328C274.658 -0.0555955 272.616 -0.760001 270.319 -0.760001V3.24ZM273.566 4.42921C274.348 5.10864 274.719 5.91419 274.719 7H278.719C278.719 4.77914 277.863 2.86469 276.191 1.41079L273.566 4.42921ZM274.719 7C274.719 8.26598 274.317 9.25801 273.513 10.0976L276.404 12.8624C277.948 11.2486 278.719 9.25401 278.719 7H274.719ZM273.545 10.0658C272.806 10.8047 271.799 11.24 270.319 11.24V15.24C272.679 15.24 274.765 14.5019 276.373 12.8942L273.545 10.0658ZM298.564 63L296.978 61.7818L294.506 65H298.564V63ZM317.364 38.52L319.363 38.5797L319.548 32.3928L315.778 37.3018L317.364 38.52ZM317.204 43.88L315.611 45.0895L319.034 49.5975L319.203 43.9397L317.204 43.88ZM299.284 20.28V18.28H295.254L297.691 21.4895L299.284 20.28ZM310.404 20.28L312.006 19.0824L311.406 18.28H310.404V20.28ZM322.964 37.08V39.08H326.956L324.566 35.8824L322.964 37.08ZM318.724 37.08L317.126 35.8776L314.716 39.08H318.724V37.08ZM331.364 20.28V18.28H330.366L329.766 19.0776L331.364 20.28ZM342.164 20.28L343.751 21.4963L346.215 18.28H342.164V20.28ZM324.084 43.88L322.084 43.8502L321.994 49.8968L325.671 45.0963L324.084 43.88ZM324.164 38.52L325.752 37.3051L322.25 32.725L322.164 38.4902L324.164 38.52ZM342.884 63V65H346.931L344.472 61.7851L342.884 63ZM331.604 63L329.996 64.1896L330.596 65H331.604V63ZM318.404 45.16L318.671 43.1779L313.982 42.5468L316.796 46.3496L318.404 45.16ZM322.564 45.72L324.164 46.92L326.209 44.1927L322.831 43.7379L322.564 45.72ZM309.604 63V65H310.604L311.204 64.2L309.604 63ZM300.15 64.2182L318.95 39.7382L315.778 37.3018L296.978 61.7818L300.15 64.2182ZM315.365 38.4603L315.205 43.8203L319.203 43.9397L319.363 38.5797L315.365 38.4603ZM318.797 42.6705L300.877 19.0705L297.691 21.4895L315.611 45.0895L318.797 42.6705ZM299.284 22.28H310.404V18.28H299.284V22.28ZM308.802 21.4776L321.362 38.2776L324.566 35.8824L312.006 19.0824L308.802 21.4776ZM322.964 35.08H318.724V39.08H322.964V35.08ZM320.322 38.2824L332.962 21.4824L329.766 19.0776L317.126 35.8776L320.322 38.2824ZM331.364 22.28H342.164V18.28H331.364V22.28ZM340.576 19.0637L322.496 42.6637L325.671 45.0963L343.751 21.4963L340.576 19.0637ZM326.084 43.9098L326.164 38.5498L322.164 38.4902L322.084 43.8502L326.084 43.9098ZM322.575 39.7349L341.295 64.2149L344.472 61.7851L325.752 37.3051L322.575 39.7349ZM342.884 61H331.604V65H342.884V61ZM333.212 61.8104L320.012 43.9704L316.796 46.3496L329.996 64.1896L333.212 61.8104ZM318.137 47.1421L322.297 47.7021L322.831 43.7379L318.671 43.1779L318.137 47.1421ZM320.964 44.52L308.004 61.8L311.204 64.2L324.164 46.92L320.964 44.52ZM309.604 61H298.564V65H309.604V61Z",
-                                        fill: "#BC4B51"
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feColorMatrix", {
+                                        in: "SourceAlpha",
+                                        type: "matrix",
+                                        values: "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0",
+                                        result: "hardAlpha"
                                     }, void 0, false, {
                                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                        lineNumber: 22,
-                                        columnNumber: 5
+                                        lineNumber: 38,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feOffset", {
+                                        dx: "3",
+                                        dy: "7"
+                                    }, void 0, false, {
+                                        fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                                        lineNumber: 44,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feGaussianBlur", {
+                                        stdDeviation: "4"
+                                    }, void 0, false, {
+                                        fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                                        lineNumber: 45,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feComposite", {
+                                        in2: "hardAlpha",
+                                        operator: "out"
+                                    }, void 0, false, {
+                                        fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                                        lineNumber: 46,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feColorMatrix", {
+                                        type: "matrix",
+                                        values: "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+                                    }, void 0, false, {
+                                        fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                                        lineNumber: 47,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feBlend", {
+                                        mode: "normal",
+                                        in2: "BackgroundImageFix",
+                                        result: "effect1_dropShadow_304_4"
+                                    }, void 0, false, {
+                                        fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                                        lineNumber: 51,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feBlend", {
+                                        mode: "normal",
+                                        in: "SourceGraphic",
+                                        in2: "effect1_dropShadow_304_4",
+                                        result: "shape"
+                                    }, void 0, false, {
+                                        fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                                        lineNumber: 56,
+                                        columnNumber: 7
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                lineNumber: 17,
-                                columnNumber: 3
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("defs", {
-                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("filter", {
-                                    id: "filter0_d_304_4",
-                                    x: "0.52002",
-                                    y: "0.239998",
-                                    width: "353.364",
-                                    height: "93.84",
-                                    filterUnits: "userSpaceOnUse",
-                                    "color-interpolation-filters": "sRGB",
-                                    children: [
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feFlood", {
-                                            "flood-opacity": "0",
-                                            result: "BackgroundImageFix"
-                                        }, void 0, false, {
-                                            fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                            lineNumber: 37,
-                                            columnNumber: 7
-                                        }, undefined),
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feColorMatrix", {
-                                            in: "SourceAlpha",
-                                            type: "matrix",
-                                            values: "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0",
-                                            result: "hardAlpha"
-                                        }, void 0, false, {
-                                            fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                            lineNumber: 38,
-                                            columnNumber: 7
-                                        }, undefined),
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feOffset", {
-                                            dx: "3",
-                                            dy: "7"
-                                        }, void 0, false, {
-                                            fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                            lineNumber: 44,
-                                            columnNumber: 7
-                                        }, undefined),
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feGaussianBlur", {
-                                            stdDeviation: "4"
-                                        }, void 0, false, {
-                                            fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                            lineNumber: 45,
-                                            columnNumber: 7
-                                        }, undefined),
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feComposite", {
-                                            in2: "hardAlpha",
-                                            operator: "out"
-                                        }, void 0, false, {
-                                            fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                            lineNumber: 46,
-                                            columnNumber: 7
-                                        }, undefined),
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feColorMatrix", {
-                                            type: "matrix",
-                                            values: "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-                                        }, void 0, false, {
-                                            fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                            lineNumber: 47,
-                                            columnNumber: 7
-                                        }, undefined),
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feBlend", {
-                                            mode: "normal",
-                                            in2: "BackgroundImageFix",
-                                            result: "effect1_dropShadow_304_4"
-                                        }, void 0, false, {
-                                            fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                            lineNumber: 51,
-                                            columnNumber: 7
-                                        }, undefined),
-                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("feBlend", {
-                                            mode: "normal",
-                                            in: "SourceGraphic",
-                                            in2: "effect1_dropShadow_304_4",
-                                            result: "shape"
-                                        }, void 0, false, {
-                                            fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                            lineNumber: 56,
-                                            columnNumber: 7
-                                        }, undefined)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                    lineNumber: 28,
-                                    columnNumber: 5
-                                }, undefined)
-                            }, void 0, false, {
-                                fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                lineNumber: 27,
-                                columnNumber: 3
+                                lineNumber: 28,
+                                columnNumber: 5
                             }, undefined)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                        lineNumber: 10,
-                        columnNumber: 9
-                    }, undefined)
-                }, void 0, false, {
-                    fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                    lineNumber: 9,
-                    columnNumber: 9
-                }, undefined),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav), {
-                    className: "me-auto",
-                    children: [
-                        !user && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
-                                    as: (0, _reactRouterDom.Link),
-                                    to: "/login",
-                                    children: "Login"
-                                }, void 0, false, {
-                                    fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                    lineNumber: 70,
-                                    columnNumber: 17
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
-                                    as: (0, _reactRouterDom.Link),
-                                    to: "/signup",
-                                    children: "Signup"
-                                }, void 0, false, {
-                                    fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                    lineNumber: 73,
-                                    columnNumber: 17
-                                }, undefined)
-                            ]
-                        }, void 0, true),
-                        user && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
-                                    as: (0, _reactRouterDom.Link),
-                                    to: "/",
-                                    children: "Home"
-                                }, void 0, false, {
-                                    fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                    lineNumber: 81,
-                                    columnNumber: 17
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
-                                    onClick: onLoggedOut,
-                                    children: "Logout"
-                                }, void 0, false, {
-                                    fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                    lineNumber: 84,
-                                    columnNumber: 17
-                                }, undefined)
-                            ]
-                        }, void 0, true)
+                        }, void 0, false, {
+                            fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                            lineNumber: 27,
+                            columnNumber: 3
+                        }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                    lineNumber: 66,
+                    lineNumber: 10,
+                    columnNumber: 9
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                lineNumber: 9,
+                columnNumber: 9
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Collapse, {
+                className: "justify-content-end",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav), {
+                    children: !user && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
+                                className: "nav-link",
+                                as: (0, _reactRouterDom.Link),
+                                to: "/login",
+                                children: "Login"
+                            }, void 0, false, {
+                                fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                                lineNumber: 70,
+                                columnNumber: 17
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
+                                className: "nav-link",
+                                as: (0, _reactRouterDom.Link),
+                                to: "/signup",
+                                children: "Signup"
+                            }, void 0, false, {
+                                fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                                lineNumber: 73,
+                                columnNumber: 17
+                            }, undefined)
+                        ]
+                    }, void 0, true)
+                }, void 0, false, {
+                    fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                    lineNumber: 67,
                     columnNumber: 11
                 }, undefined)
-            ]
-        }, void 0, true, {
-            fileName: "src/components/navigation-bar/navigation-bar.jsx",
-            lineNumber: 8,
-            columnNumber: 9
-        }, undefined)
-    }, void 0, false, {
+            }, void 0, false, {
+                fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                lineNumber: 66,
+                columnNumber: 9
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav), {
+                children: user && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                    children: [
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
+                            className: "nav-link",
+                            as: (0, _reactRouterDom.Link),
+                            to: "/",
+                            children: "Home"
+                        }, void 0, false, {
+                            fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                            lineNumber: 84,
+                            columnNumber: 17
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
+                            className: "nav-link",
+                            as: (0, _reactRouterDom.Link),
+                            to: "/profile",
+                            children: "My Profile"
+                        }, void 0, false, {
+                            fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                            lineNumber: 85,
+                            columnNumber: 17
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
+                            className: "nav-link",
+                            onClick: onLoggedOut,
+                            children: "Logout"
+                        }, void 0, false, {
+                            fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                            lineNumber: 86,
+                            columnNumber: 17
+                        }, undefined)
+                    ]
+                }, void 0, true)
+            }, void 0, false, {
+                fileName: "src/components/navigation-bar/navigation-bar.jsx",
+                lineNumber: 81,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
         fileName: "src/components/navigation-bar/navigation-bar.jsx",
         lineNumber: 7,
         columnNumber: 8
@@ -48088,6 +48198,288 @@ $RefreshReg$(_c, "NavigationBar");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"jj9zW","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"erfJX"}],"lJZlQ":[function() {},{}]},["3DyEu","bEgxq","d8Dch"], "d8Dch", "parcelRequirea671")
+},{"react/jsx-dev-runtime":"iTorj","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"jj9zW","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"erfJX"}],"2vVqf":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$3c12 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$3c12.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ProfileView", ()=>ProfileView);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _movieCard = require("../movie-card/movie-card");
+var _movieCardDefault = parcelHelpers.interopDefault(_movieCard);
+var _reactBootstrap = require("react-bootstrap");
+var _s = $RefreshSig$();
+const ProfileView = ({ user, token, movies, setUser })=>{
+    _s();
+    const [name, setName] = (0, _react.useState)("");
+    const [password, setPassword] = (0, _react.useState)("");
+    const [email, setEmail] = (0, _react.useState)("");
+    const [birthday, setBirthday] = (0, _react.useState)("");
+    const favoriteMovies = movies.filter((movie)=>{
+        user.FavoriteMovies.includes(movie._id);
+    });
+    const handleUpdate = (event)=>{
+        event.preventDefault();
+        let data = {
+            name: name,
+            email: email,
+            birthday: birthday
+        };
+        fetch(`https://movie-api-da5i.onrender.com/users/${user.name}`, {
+            method: "PUT",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            if (response.ok) return response.json();
+            else alert("Update failed.");
+        }).then((data)=>{
+            if (data) {
+                localStorage.setItem("user", JSON.stringify(data));
+                setUser(data);
+            }
+        });
+    };
+    const handleDelete = ()=>{
+        fetch(`https://movie-api-da5i.onrender.com/users/${user.name}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            if (response.ok) {
+                setUser(null);
+                alert("Your account has been deleted");
+            } else alert("something went wrong.");
+        });
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                        className: "profile-title",
+                        children: "My Profile"
+                    }, void 0, false, {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 69,
+                        columnNumber: 8
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
+                        md: 4,
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                                className: "update-title",
+                                children: "Update info"
+                            }, void 0, false, {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 71,
+                                columnNumber: 9
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form), {
+                                className: "my-profile",
+                                onSubmit: handleUpdate,
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
+                                        className: "mb-2",
+                                        controlId: "formName",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
+                                                children: "Name:"
+                                            }, void 0, false, {
+                                                fileName: "src/components/profile-view/profile-view.jsx",
+                                                lineNumber: 74,
+                                                columnNumber: 9
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
+                                                type: "text",
+                                                value: name,
+                                                onChange: (e)=>setName(e.target.value),
+                                                required: true
+                                            }, void 0, false, {
+                                                fileName: "src/components/profile-view/profile-view.jsx",
+                                                lineNumber: 75,
+                                                columnNumber: 9
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                        lineNumber: 73,
+                                        columnNumber: 9
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
+                                        className: "mb-2",
+                                        controlId: "formPassword",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
+                                                children: "Password:"
+                                            }, void 0, false, {
+                                                fileName: "src/components/profile-view/profile-view.jsx",
+                                                lineNumber: 83,
+                                                columnNumber: 9
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
+                                                type: "password",
+                                                value: password,
+                                                onChange: (e)=>setPassword(e.target.value),
+                                                required: true
+                                            }, void 0, false, {
+                                                fileName: "src/components/profile-view/profile-view.jsx",
+                                                lineNumber: 84,
+                                                columnNumber: 9
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                        lineNumber: 82,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
+                                        className: "mb-2",
+                                        controlId: "formEmail",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
+                                                children: "Email:"
+                                            }, void 0, false, {
+                                                fileName: "src/components/profile-view/profile-view.jsx",
+                                                lineNumber: 92,
+                                                columnNumber: 9
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
+                                                type: "email",
+                                                value: email,
+                                                onChange: (e)=>setEmail(e.target.value),
+                                                required: true
+                                            }, void 0, false, {
+                                                fileName: "src/components/profile-view/profile-view.jsx",
+                                                lineNumber: 93,
+                                                columnNumber: 9
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                        lineNumber: 91,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
+                                        controlId: "formBirthday",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
+                                                children: "Birthday:"
+                                            }, void 0, false, {
+                                                fileName: "src/components/profile-view/profile-view.jsx",
+                                                lineNumber: 101,
+                                                columnNumber: 9
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
+                                                type: "date",
+                                                value: birthday,
+                                                onChange: (e)=>setBirthday(e.target.value),
+                                                required: true
+                                            }, void 0, false, {
+                                                fileName: "src/components/profile-view/profile-view.jsx",
+                                                lineNumber: 102,
+                                                columnNumber: 9
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                        lineNumber: 100,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                                        className: "update",
+                                        type: "submit",
+                                        onClick: handleUpdate,
+                                        children: "Update"
+                                    }, void 0, false, {
+                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                        lineNumber: 109,
+                                        columnNumber: 7
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                                        className: "delete",
+                                        onClick: handleDelete,
+                                        children: "Delete Account"
+                                    }, void 0, false, {
+                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                        lineNumber: 110,
+                                        columnNumber: 7
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 72,
+                                columnNumber: 9
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 70,
+                        columnNumber: 9
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/profile-view/profile-view.jsx",
+                lineNumber: 68,
+                columnNumber: 5
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
+                    className: "justify-content-md-center ",
+                    children: favoriteMovies.map((movie)=>{
+                        return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
+                            className: "mb-4 justify-content-center align-items-center d-flex",
+                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCardDefault.default), {
+                                movie: movie,
+                                token: token,
+                                setUser: setUser,
+                                user: user
+                            }, void 0, false, {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 133,
+                                columnNumber: 17
+                            }, undefined)
+                        }, movie._id, false, {
+                            fileName: "src/components/profile-view/profile-view.jsx",
+                            lineNumber: 129,
+                            columnNumber: 15
+                        }, undefined);
+                    })
+                }, void 0, false, {
+                    fileName: "src/components/profile-view/profile-view.jsx",
+                    lineNumber: 126,
+                    columnNumber: 9
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/profile-view/profile-view.jsx",
+                lineNumber: 125,
+                columnNumber: 5
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/profile-view/profile-view.jsx",
+        lineNumber: 67,
+        columnNumber: 3
+    }, undefined);
+};
+_s(ProfileView, "jaOgMEVKDMRKUt5FZLn+uaRNTJc=");
+_c = ProfileView;
+var _c;
+$RefreshReg$(_c, "ProfileView");
+
+  $parcel$ReactRefreshHelpers$3c12.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"bwuIu","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"jj9zW","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"erfJX"}],"lJZlQ":[function() {},{}]},["3DyEu","bEgxq","d8Dch"], "d8Dch", "parcelRequirea671")
 
 //# sourceMappingURL=index.b4b6dfad.js.map

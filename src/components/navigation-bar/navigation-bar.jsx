@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const NavigationBar = ({user, onLoggedOut}) => {
     return (
        <Navbar className="my-navbar shadow-lg ">
-        <Container>
+       
         <Navbar.Brand>
         <svg
   width="300"
@@ -63,30 +63,31 @@ export const NavigationBar = ({user, onLoggedOut}) => {
   </defs>
 </svg>
         </Navbar.Brand>
-          <Nav className="me-auto">
-            
+        <Navbar.Collapse className="justify-content-end">
+          <Nav>
             {!user && (
               <>
-                <Nav.Link as={Link} to="/login">
+                <Nav.Link className="nav-link" as={Link} to="/login">
                   Login
                 </Nav.Link>
-                <Nav.Link as={Link} to="/signup">
+                <Nav.Link className="nav-link" as={Link} to="/signup">
                   Signup
                 </Nav.Link>
               </>
             )}
-            
+
+      </Nav> 
+      </Navbar.Collapse >
+      <Nav >
             {user && (
               <>
-                <Nav.Link as={Link} to="/">
-                  Home
-                </Nav.Link>
-                <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+                <Nav.Link className="nav-link" as={Link} to="/">Home</Nav.Link>
+                <Nav.Link className="nav-link" as={Link} to="/profile">My Profile</Nav.Link>
+                <Nav.Link className="nav-link" onClick={onLoggedOut}>Logout</Nav.Link>
               </>
             )}
             
-          </Nav>
-        </Container>
+      </Nav>
        </Navbar>
 
     )

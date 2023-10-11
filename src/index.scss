@@ -12,7 +12,7 @@ body {
 
 .submit,
 .close-open-btn,
-.btn-logout  {
+.btn-logout {
     margin-top: 1rem;
     background-color: #bc4b51;
     border: none;
@@ -58,4 +58,75 @@ body {
     font-size: 1.2rem;
     
 }
+
+svg {
+    margin:  0.5rem 0 0.5rem 4rem;
+}
+
+.nav-link {
+    margin-right: 1rem;
+    color: #fefee3;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    
+}
+
+.nav-link:hover {
+    color: #bc4b51;
+}
+
+.my-profile {
+  margin: 2rem;
+  color: #fefee3;
+}
+
+.profile-title{
+    text-align: center;
+    margin-top: 2rem;
+    color: #fefee3;
+    letter-spacing: 2px;
+
+}
+
+.update-title {
+    text-align: center;
+    color: #fefee3;
+    letter-spacing: 1px;
+}
+
+.delete, .update {
+    margin-top: 2rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.update {
+  background-color: #fefee3;
+  color: #353535;
+}
+
+.update:hover {
+    background-color: #fefee3;
+    color: #353535;
+}
+
+.delete {
+    float: right;
+    background-color: #bc4b51;
+    color: #fefee3;
+}
+
+.delete:hover {
+    float: right;
+    background-color: #bc4b51;
+    color: #fefee3;
+}
+
+.delete:hover, .update:hover{
+    opacity: 0.9;
+}
+
+
 

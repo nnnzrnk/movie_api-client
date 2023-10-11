@@ -13251,4 +13251,60 @@ body {
   font-weight: 500;
 }
 
+svg {
+  margin: .5rem 0 .5rem 4rem;
+}
+
+.nav-link {
+  color: #fefee3;
+  letter-spacing: 1px;
+  margin-right: 1rem;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #bc4b51;
+}
+
+.my-profile {
+  color: #fefee3;
+  margin: 2rem;
+}
+
+.profile-title {
+  text-align: center;
+  color: #fefee3;
+  letter-spacing: 2px;
+  margin-top: 2rem;
+}
+
+.update-title {
+  text-align: center;
+  color: #fefee3;
+  letter-spacing: 1px;
+}
+
+.delete, .update {
+  cursor: pointer;
+  border: none;
+  margin-top: 2rem;
+  font-weight: 500;
+}
+
+.update, .update:hover {
+  color: #353535;
+  background-color: #fefee3;
+}
+
+.delete, .delete:hover {
+  float: right;
+  color: #fefee3;
+  background-color: #bc4b51;
+}
+
+.delete:hover, .update:hover {
+  opacity: .9;
+}
+
 /*# sourceMappingURL=index.ce1d6491.css.map */

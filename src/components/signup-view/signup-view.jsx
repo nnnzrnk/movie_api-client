@@ -31,7 +31,7 @@ export const SignupView = () => {
     });}
 
   return (
-    <Container >
+    
 <Row>
   <Col> 
   <Card className="shadow p-4 mb-4 bg-white mt-5 border-0 ">
@@ -79,8 +79,5 @@ export const SignupView = () => {
   </Card>
   </Col>
 </Row>
-
-   
-  </Container>
   )
 }
