@@ -18,6 +18,7 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken ? storedToken : null);
 
   useEffect(() => {
+    console.log(token, user)
     if (!token) {
       return;
     }
@@ -71,8 +72,6 @@ export const MainView = () => {
                       onLoggedIn={(user, token) => {
                         setUser(user);
                         setToken(token);
-                        localStorage.setItem("user", user);
-                        localStorage.setItem("token", token);
                       }}
                     />
                   </Col>

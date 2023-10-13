@@ -10,9 +10,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
     const [birthday, setBirthday] = useState('')
 
 
-    const favoriteMovies = movies.filter((movie) => {
-	    user.FavoriteMovies.includes(movie._id)
-	});
+    // const favoriteMovies = movies.filter((movie) =>  user.FavoriteMovies.includes(movie._id));
 
     const handleUpdate = (event) => {
         event.preventDefault();
@@ -116,33 +114,32 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
     </Row>
 
 
-   
-       
 
 
 
-
-    <Container>
-        <Row className="justify-content-md-center ">
-          {favoriteMovies.map((movie) => {
-            return (
-              <Col
-                key={movie._id}
-                className="mb-4 justify-content-center align-items-center d-flex"
-              >
-                <MovieCard
-                  movie={movie}
-                  token={token}
-                  setUser={setUser}
-                  user={user}
-                />
-              </Col>
-            );
-          })}
-        </Row>
-      </Container>
 
   </Container>
 
     )
 }
+
+
+{/* <Container>
+<Row className="justify-content-md-center ">
+  {favoriteMovies.map((movie) => {
+    return (
+      <Col
+        key={movie._id}
+        className="mb-4 justify-content-center align-items-center d-flex"
+      >
+        <MovieCard
+          movie={movie}
+          token={token}
+          setUser={setUser}
+          user={user}
+        />
+      </Col>
+    );
+  })}
+</Row>
+</Container>   */}

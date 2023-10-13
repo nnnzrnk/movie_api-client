@@ -5,9 +5,9 @@ import { useEffect, useState } from 'react';
 
 export const MovieCard = ({ movieData, token, setUser, user }) => {
  
-  const [isFavorite, setIsFavorite] = useState(
-    user.FavoriteMovies.includes(movieData._id)
-  );
+  // const [isFavorite, setIsFavorite] = useState(
+  //   user.FavoriteMovies.includes(movieData._id)
+  // );
 
 const addFavoriteMovie = () => {
   fetch(`https://movie-api-da5i.onrender.com/users/${user.name}/movies/${movieData._id}`),
@@ -68,13 +68,7 @@ const addFavoriteMovie = () => {
         <Link to={`/movies/${encodeURIComponent(movieData._id)}`}>    
         <Button className='close-open-btn'>Open</Button>
         </Link>
-        <Card.Footer>
-          {!isFavorite ? (
-            <Button onClick={addFavoriteMovie}>+</Button>
-          ) : (
-            <Button onClick={removeFavoriteMovie}>-</Button>
-          )}
-        </Card.Footer>
+
        </Card.Body>
 
       </Card>
@@ -94,3 +88,11 @@ const addFavoriteMovie = () => {
 
 
 
+
+//   <Card.Footer>
+//   {!isFavorite ? (
+//     <Button onClick={addFavoriteMovie}>+</Button>
+//   ) : (
+//     <Button onClick={removeFavoriteMovie}>-</Button>
+//   )}
+// </Card.Footer>

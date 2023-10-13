@@ -2,10 +2,13 @@ import { Button, Card} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
-export const MovieView = ({movies}) => {
+
+export  const MovieView = ({movies}) => {
 
 const movieId = useParams()
 const movie = movies.find((m) => m._id === movieId);
+
+console.log(movieId)
 
     return (
     <Card className='shadow p-4 border-0'>
