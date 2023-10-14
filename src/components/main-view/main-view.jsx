@@ -18,7 +18,7 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken ? storedToken : null);
 
   useEffect(() => {
-    console.log(token, user)
+    // console.log(token, user)
     if (!token) {
       return;
     }
@@ -134,6 +134,9 @@ export const MainView = () => {
                   <Col>
                     <Row>
                       <ProfileView
+                       user={user}
+                       token={token}
+                       setUser={setUser}
                         movies={movies}
                         onDelete={() => {
                           setUser(null);

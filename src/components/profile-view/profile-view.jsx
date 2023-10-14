@@ -9,38 +9,46 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
     const [email, setEmail] = useState('')
     const [birthday, setBirthday] = useState('')
 
+  
+    // let result = movies.filter((movie) => user.favoriteMovies.includes(movie._id));
 
-    // const favoriteMovies = movies.filter((movie) =>  user.FavoriteMovies.includes(movie._id));
 
+    
     const handleUpdate = (event) => {
         event.preventDefault();
     
-        let data = {
+        const data = {
           name: name,
+          password: password,
           email: email,
           birthday: birthday,
         }
 
-        fetch(`https://movie-api-da5i.onrender.com/users/${user.name}`, {   
+        
+      fetch(`https://movie-api-da5i.onrender.com/users/${user.name}`, {   
 			method: "PUT",
 			body: JSON.stringify(data),
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${token}`
 			}
-		}).then((response) => {
+		}).then(async (response) => {
+      console.log(response)
 			if (response.ok) {
-				return response.json();
+        response.json();
+        alert('updated!')
+        localStorage.setItem('user', JSON.stringify(data))
+        setUser(data)
+				
 			} else {
+        const e = await response.text()
+        console.log(e)
 				alert("Update failed.")
 			}
-		}).then((data) => {
-			if (data) {
-				localStorage.setItem("user", JSON.stringify(data));
-				setUser(data);
-			}
 		})
+
     } 
+
 
     const handleDelete = () => {
 		fetch(`https://movie-api-da5i.onrender.com/users/${user.name}`, {
@@ -58,6 +66,8 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
 		})
 	}
 
+  console.log(user)
+  console.log(user.name)
 
 
     return (
@@ -111,11 +121,12 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
   
         </Col>
 
+
+
+
+
+
     </Row>
-
-
-
-
 
 
   </Container>
@@ -124,22 +135,22 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
 }
 
 
-{/* <Container>
-<Row className="justify-content-md-center ">
-  {favoriteMovies.map((movie) => {
-    return (
-      <Col
-        key={movie._id}
-        className="mb-4 justify-content-center align-items-center d-flex"
-      >
-        <MovieCard
-          movie={movie}
-          token={token}
-          setUser={setUser}
-          user={user}
-        />
-      </Col>
-    );
-  })}
-</Row>
-</Container>   */}
+// <Container>
+// <Row className="justify-content-md-center ">
+//   {result.map((movie) => {
+//     return (
+//       <Col
+//         key={movie._id}
+//         className="mb-4 justify-content-center align-items-center d-flex"
+//       >
+//         <MovieCard
+//           movie={movie}
+//           token={token}
+//           setUser={setUser}
+//           user={user}
+//         />
+//       </Col>
+//     );
+//   })}
+// </Row>
+// </Container>   
