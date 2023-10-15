@@ -13275,13 +13275,6 @@ svg {
 .profile-title {
   text-align: center;
   color: #fefee3;
-  letter-spacing: 2px;
-  margin-top: 2rem;
-}
-
-.update-title {
-  text-align: center;
-  color: #fefee3;
   letter-spacing: 1px;
 }
 
@@ -13305,6 +13298,17 @@ svg {
 
 .delete:hover, .update:hover {
   opacity: .9;
+}
+
+.favorite-btns {
+  float: right;
+}
+
+.fav-btn {
+  color: #fefee3;
+  background-color: #3c6e71;
+  border: none;
+  font-weight: 800;
 }
 
 /*# sourceMappingURL=index.ce1d6491.css.map */

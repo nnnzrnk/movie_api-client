@@ -1,17 +1,16 @@
-import { useState } from "react";
-import MovieCard from "../movie-card/movie-card"
+import  {useState}  from "react";
+import { MovieCard } from "../movie-card/movie-card"
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 export const ProfileView = ({ user, token, movies, setUser }) => {
 
-    const [name, setName] = useState('')
-    const [password, setPassword] = useState('')
-    const [email, setEmail] = useState('')
-    const [birthday, setBirthday] = useState('')
+    const [name, setName] = useState(user.name)
+    const [password, setPassword] = useState(user.password)
+    const [email, setEmail] = useState(user.email)
+    const [birthday, setBirthday] = useState(user.birthday)
 
   
-    // let result = movies.filter((movie) => user.favoriteMovies.includes(movie._id));
-
+    const favMov = movies.filter((movie) => {return user.favoriteMovies.includes(movie._id)});
 
     
     const handleUpdate = (event) => {
@@ -25,7 +24,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
         }
 
         
-      fetch(`https://movie-api-da5i.onrender.com/users/${user.name}`, {   
+      fetch(`https://movie-api-da5i.onrender.com/users/${user.name}` , {   
 			method: "PUT",
 			body: JSON.stringify(data),
 			headers: {
@@ -66,17 +65,41 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
 		})
 	}
 
-  console.log(user)
-  console.log(user.name)
-
-
     return (
 
+
+
+
   <Container>
-    <Row >
-       <h1 className="profile-title">My Profile</h1>
-        <Col md={4} >
-        <h2 className="update-title">Update info</h2>
+<Row className="justify-content-md-center mx-3 my-4">
+<h2 className="profile-title">Favorite movies</h2>
+  {favMov.map((movie) => {
+     return (
+      
+      <Col
+        key={movie._id}
+       className="m-3"
+      >
+        <MovieCard
+          movie={movie}
+          token={token}
+          setUser={setUser}
+          user={user}
+        />
+      </Col>
+    );
+  })}
+ </Row>
+
+
+
+
+
+
+    <Row className="justify-content-center">
+      
+        <Col md={6} >
+        <h2 className="profile-title">Update info</h2>
         <Form className="my-profile" onSubmit={handleUpdate}>
         <Form.Group className="mb-2" controlId="formName">
         <Form.Label>Name:</Form.Label>
@@ -121,11 +144,6 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
   
         </Col>
 
-
-
-
-
-
     </Row>
 
 
@@ -135,22 +153,5 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
 }
 
 
-// <Container>
-// <Row className="justify-content-md-center ">
-//   {result.map((movie) => {
-//     return (
-//       <Col
-//         key={movie._id}
-//         className="mb-4 justify-content-center align-items-center d-flex"
-//       >
-//         <MovieCard
-//           movie={movie}
-//           token={token}
-//           setUser={setUser}
-//           user={user}
-//         />
-//       </Col>
-//     );
-//   })}
-// </Row>
-// </Container>   
+
+

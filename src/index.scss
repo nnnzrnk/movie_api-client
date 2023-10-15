@@ -81,15 +81,8 @@ svg {
   color: #fefee3;
 }
 
-.profile-title{
-    text-align: center;
-    margin-top: 2rem;
-    color: #fefee3;
-    letter-spacing: 2px;
 
-}
-
-.update-title {
+.profile-title {
     text-align: center;
     color: #fefee3;
     letter-spacing: 1px;
@@ -128,4 +121,13 @@ svg {
     opacity: 0.9;
 }
 
+.favorite-btns {
+    float: right;
+}
 
+.fav-btn {
+    background-color: #3c6e71;
+    color: #fefee3;
+    font-weight: 800;
+    border: none;
+}

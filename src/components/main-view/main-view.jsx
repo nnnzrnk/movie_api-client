@@ -12,17 +12,21 @@ export const MainView = () => {
   // const storedUser = JSON.parse(localStorage.getItem("user")); // got an error 'SyntaxError: "undefined" is not valid JSON'
   const storedUser = localStorage.getItem("user"); //works as as it should
   const storedToken = localStorage.getItem("token");
+  const parseUser = JSON.parse(storedUser)
+
 
   const [movies, setMovies] = useState([]);
-  const [user, setUser] = useState(storedUser ? storedUser : null);
+  const [user, setUser] = useState(storedUser ? parseUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
 
+
+
   useEffect(() => {
-    // console.log(token, user)
+
     if (!token) {
       return;
     }
-    fetch("https://movie-api-da5i.onrender.com/movies", {
+    fetch(`https://movie-api-da5i.onrender.com/movies`, {
 			headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
 		})
     .then((response) => response.json())
@@ -113,7 +117,7 @@ export const MainView = () => {
                         md={3}
                         className="mx-2 my-3 justify-content-md-center"
                       >
-                        <MovieCard movieData={movie} 
+                        <MovieCard movie={movie} 
                                    user={user}
 													         token={token}
 													         setUser={setUser} />
