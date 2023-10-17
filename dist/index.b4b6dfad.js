@@ -27374,7 +27374,7 @@ const MovieCard = ({ movie, token, setUser, user })=>{
     _s();
     const [isFavorite, setIsFavorite] = (0, _react.useState)(false);
     (0, _react.useEffect)(()=>{
-        if (user.favoriteMovies.includes(movie._id)) setIsFavorite(true);
+        if (user.favoriteMovies && user.favoriteMovies.includes(movie._id)) setIsFavorite(true);
     }, [
         user
     ]);
@@ -27500,7 +27500,7 @@ const MovieCard = ({ movie, token, setUser, user })=>{
 _s(MovieCard, "lh6fxD9+vLbuebOO0x4Y5WwBqk4=");
 _c = MovieCard;
 MovieCard.propTypes = {
-    movieData: (0, _propTypesDefault.default).shape({
+    movie: (0, _propTypesDefault.default).shape({
         title: (0, _propTypesDefault.default).string.isRequired,
         image: (0, _propTypesDefault.default).string.isRequired,
         description: (0, _propTypesDefault.default).string.isRequired
@@ -47939,7 +47939,7 @@ const SignupView = ()=>{
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                             type: "date",
-                                            value: birthday,
+                                            value: birthday.slice(0, 10),
                                             onChange: (e)=>setBirthday(e.target.value),
                                             required: true
                                         }, void 0, false, {
@@ -48263,9 +48263,7 @@ const ProfileView = ({ user, token, movies, setUser })=>{
     const [password, setPassword] = (0, _react.useState)(user.password);
     const [email, setEmail] = (0, _react.useState)(user.email);
     const [birthday, setBirthday] = (0, _react.useState)(user.birthday);
-    const favMov = movies.filter((movie)=>{
-        return user.favoriteMovies.includes(movie._id);
-    });
+    const favMov = user.favoriteMovies ? movies.filter((movie)=>user.favoriteMovies.includes(movie._id)) : [];
     const handleUpdate = (event)=>{
         event.preventDefault();
         const data = {
@@ -48286,12 +48284,15 @@ const ProfileView = ({ user, token, movies, setUser })=>{
             if (response.ok) {
                 response.json();
                 alert("updated!");
-                localStorage.setItem("user", JSON.stringify(data));
-                setUser(data);
             } else {
                 const e = await response.text();
                 console.log(e);
                 alert("Update failed.");
+            }
+        }).then((updatedUser)=>{
+            if (updatedUser) {
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+                setUser(updatedUser);
             }
         });
     };
@@ -48456,7 +48457,7 @@ const ProfileView = ({ user, token, movies, setUser })=>{
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                             type: "date",
-                                            value: birthday,
+                                            value: birthday.slice(0, 10),
                                             onChange: (e)=>setBirthday(e.target.value),
                                             required: true
                                         }, void 0, false, {

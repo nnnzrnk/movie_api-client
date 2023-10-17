@@ -9,10 +9,10 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
     const [email, setEmail] = useState(user.email)
     const [birthday, setBirthday] = useState(user.birthday)
 
-  
-    const favMov = movies.filter((movie) => {return user.favoriteMovies.includes(movie._id)});
 
-    
+    const favMov = user.favoriteMovies ? movies.filter((movie) => user.favoriteMovies.includes(movie._id)) : [];
+
+
     const handleUpdate = (event) => {
         event.preventDefault();
     
@@ -36,15 +36,17 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
 			if (response.ok) {
         response.json();
         alert('updated!')
-        localStorage.setItem('user', JSON.stringify(data))
-        setUser(data)
-				
 			} else {
         const e = await response.text()
         console.log(e)
 				alert("Update failed.")
 			}
-		})
+		}).then((updatedUser) =>{
+      if(updatedUser) {
+        localStorage.setItem('user', JSON.stringify(updatedUser))
+        setUser(updatedUser)
+      }  
+    })
 
     } 
 
@@ -66,8 +68,6 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
 	}
 
     return (
-
-
 
 
   <Container>
@@ -132,7 +132,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
         <Form.Label>Birthday:</Form.Label>
         <Form.Control
          type="date"
-         value={birthday}
+         value={birthday.slice(0, 10)}
          onChange={(e) => setBirthday(e.target.value)}
          required/>
       </Form.Group>

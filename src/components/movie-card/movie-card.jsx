@@ -9,7 +9,7 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
   );
 
   useEffect(() => {
-    if (user.favoriteMovies.includes(movie._id)) {
+    if (user.favoriteMovies && user.favoriteMovies.includes(movie._id)) {
       setIsFavorite(true);
     }
   }, [user]);
@@ -90,7 +90,7 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
 };
 
 MovieCard.propTypes = {
-  movieData: PropTypes.shape({
+  movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
