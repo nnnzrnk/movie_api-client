@@ -23,6 +23,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
           birthday: birthday,
         }
 
+
         
       fetch(`https://movie-api-da5i.onrender.com/users/${user.name}` , {   
 			method: "PUT",
@@ -132,7 +133,7 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
         <Form.Label>Birthday:</Form.Label>
         <Form.Control
          type="date"
-         value={birthday.slice(0, 10)}
+         value={birthday}
          onChange={(e) => setBirthday(e.target.value)}
          required/>
       </Form.Group>
