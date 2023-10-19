@@ -5,7 +5,7 @@ export const LoginView = ({ onLoggedIn }) => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = {
@@ -13,21 +13,27 @@ export const LoginView = ({ onLoggedIn }) => {
       password: password,
     };
 
-    fetch("https://movie-api-da5i.onrender.com/login", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
+    try {
+      const response = await fetch("https://movie-api-da5i.onrender.com/login", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    
       if (response.ok) {
-        localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("token", data.token);
+        const responseData = await response.json();
+        // console.log('token', responseData.token);
+        localStorage.setItem("user", JSON.stringify(responseData.user));
+        localStorage.setItem("token", responseData.token);
         onLoggedIn(name);
       } else {
         alert("Login failed");
       }
-    });
+    } catch (error) {
+      console.error("An error occurred during login:", error);
+    }
   };
 
   return (

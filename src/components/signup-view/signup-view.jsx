@@ -6,7 +6,9 @@ export const SignupView = () => {
  const [password, setPassword] = useState('')
  const [email, setEmail] = useState('')
  const [birthday, setBirthday] = useState('')
- const handleSubmit = (event) => {event.preventDefault();
+ 
+ const handleSubmit = (event) => {
+  event.preventDefault();
 
     const data = {
       name: name,
@@ -21,17 +23,20 @@ export const SignupView = () => {
       headers: {
         "Content-Type": "application/json"
       }
-    }).then((response) => {
+    }).then(async(response) => {
+      console.log(response)
       if (response.ok) {
         alert('Signup successful')
         window.location.reload()
       } else {
+        const e = await response.text()
+        console.log(e)
         alert("Signup failed");
       }
     });}
 
   return (
-    <Container >
+    
 <Row>
   <Col> 
   <Card className="shadow p-4 mb-4 bg-white mt-5 border-0 ">
@@ -79,8 +84,5 @@ export const SignupView = () => {
   </Card>
   </Col>
 </Row>
-
-   
-  </Container>
   )
 }
