@@ -1,5 +1,5 @@
 ### [![logo](./img/MyFlix.svg)](https://myflixxx.netlify.app)
-#####This “movies” web application was developed by me under the guidance of a tutor and mentor while taking a Web Development course at CareerFoundry. 
+##### This “movies” web application was developed by me under the guidance of a tutor and mentor while taking a Web Development course at CareerFoundry. 
 
 ___
 ### Website functionality: 
