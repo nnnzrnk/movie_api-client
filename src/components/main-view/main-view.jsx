@@ -7,6 +7,7 @@ import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 import { Row, Col } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { SearchView } from "../search-view/search-view";
 
 export const MainView = () => {
   // const storedUser = JSON.parse(localStorage.getItem("user")); // got an error 'SyntaxError: "undefined" is not valid JSON'
@@ -19,6 +20,13 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser ? parseUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
 
+  const handleSearch = (search) => {
+		const filteredMovies = movies.filter((movie) =>
+			movie.title.toLowerCase().includes(search.toLowerCase())
+		);
+
+		setMovies(filteredMovies);
+	};
 
 
   useEffect(() => {
@@ -41,6 +49,7 @@ export const MainView = () => {
     <BrowserRouter>
       <NavigationBar
         user={user}
+        
         onLoggedOut={() => {
           setUser(null);
           localStorage.clear();
@@ -111,6 +120,12 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
+                <Row>
+                  <Col>
+                  <SearchView onSearch={handleSearch} />
+                  </Col>
+                </Row>
+                 
                     {movies.map((movie) => (
                       <Col
                         key={movie._id}
